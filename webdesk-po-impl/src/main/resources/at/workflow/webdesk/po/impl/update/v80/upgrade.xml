@@ -1,0 +1,9 @@
+<upgrade>
+    
+    <java failOnError="true">at.workflow.webdesk.po.impl.update.v80.PoMigratePasswords</java>
+
+    <sql dataSource="webdesk" failOnError="true">alter table PoPerson drop column password</sql>
+    
+</upgrade>
+
+

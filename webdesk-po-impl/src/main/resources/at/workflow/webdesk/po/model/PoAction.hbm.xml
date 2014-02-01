@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class table="PoAction" name="at.workflow.webdesk.po.model.PoAction" lazy="false">
+    <cache usage="read-write" />
+    <id name="UID" type="string" column="ACTION_UID" length="32">
+      <generator class="uuid.hex" />
+    </id>
+    <property name="name" length="255" not-null="true" />
+    <property name="caption" />
+    <set inverse="true" lazy="true" name="files">
+      <key not-null="false" column="ACTION_UID" />
+      <one-to-many class="at.workflow.webdesk.po.model.PoFile" />
+    </set>
+    <set inverse="true" lazy="true" name="helpMessages">
+      <key not-null="false" column="ACTION_UID" />
+      <one-to-many class="at.workflow.webdesk.po.model.PoHelpMessage" />
+    </set>
+    <set inverse="true" lazy="true" name="permissions">
+      <key not-null="false" column="ACTION_UID" />
+      <one-to-many class="at.workflow.webdesk.po.model.PoAPermissionBase" />
+    </set>
+    <property name="description" />
+    <property name="allowUpdateOnVersionChange" />
+    <set inverse="true" lazy="true" name="textModules">
+      <key not-null="false" column="ACTION_UID" />
+      <one-to-many class="at.workflow.webdesk.po.model.PoTextModule" />
+    </set>
+    <property name="ranking" />
+    <property name="defaultViewPermissionType" />
+    <many-to-one column="ALLOWS_ACTION_UID" cascade="none" foreign-key="FK_ACTION_ACTION_ALLOWS" lazy="false" not-null="false" name="allowsAction" />
+    <many-to-one column="MODULE_UID" cascade="none" foreign-key="FK_ACTION_MODULE" lazy="false" not-null="false" name="module" />
+    <set inverse="true" lazy="true" name="allowedByActions">
+      <key not-null="false" column="ALLOWS_ACTION_UID" />
+      <one-to-many class="at.workflow.webdesk.po.model.PoAction" />
+    </set>
+    <many-to-one column="ACTION_PARENT_UID" cascade="none" foreign-key="FK_ACTION_ACTION_PARENT" lazy="false" not-null="false" name="parent" />
+    <set inverse="true" order-by="ranking" lazy="true" name="childs">
+      <key not-null="false" column="ACTION_PARENT_UID" />
+      <one-to-many class="at.workflow.webdesk.po.model.PoAction" />
+    </set>
+    <property name="actionFolder" length="50" />
+    <property name="image" />
+    <property name="imageSet" />
+    <property name="actionType" />
+    <property name="processDefId" />
+    <property name="configurable" />
+    <property name="sqlQuery" type="text" />
+    <property name="universallyAllowed" />
+    <property name="detached" />
+    <property name="disableContinuationInvalidate" />
+    <property name="prohibitUsageBySwitchedUsers" />
+    <property name="refreshOnComingBack" />
+    <map inverse="false" cascade="all-delete-orphan" lazy="true" table="PoActionAttributes" name="attributes" >
+      <key column="ACTION_UID" foreign-key="FK_ACTIONATTRIBUTES_ACTION"/>
+      <map-key type="string" column="name" />
+      <element type="string" column="value" length="2000" />
+    </map>
+    <property name="controller" />
+    <property name="controllerPattern" />
+    <property name="validfrom" not-null="true" type="timestamp" />
+    <property name="validto" not-null="true" type="timestamp" />
+    <property name="alwaysOpenInNewWindow" />
+    <property name="layoutTemplateToUse" length="50" />
+    <set inverse="true" lazy="true" name="parameters" cascade="all-delete-orphan">
+      <key not-null="false" column="ACTION_UID" />
+      <one-to-many class="at.workflow.webdesk.po.model.PoActionParameter" />
+    </set>
+    <set inverse="true" lazy="true" name="urlPatterns" cascade="all-delete-orphan">
+      <key not-null="false" column="ACTION_UID" />
+      <one-to-many class="at.workflow.webdesk.po.model.PoActionUrlPattern" />
+    </set>
+    <set inverse="true" lazy="true" name="contextParameters" cascade="all-delete-orphan">
+      <key not-null="false" column="ACTION_UID" />
+      <one-to-many class="at.workflow.webdesk.po.model.PoContextParameter" />
+    </set>
+  </class>
+</hibernate-mapping>

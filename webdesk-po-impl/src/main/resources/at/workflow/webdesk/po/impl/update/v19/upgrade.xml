@@ -1,0 +1,7 @@
+<upgrade>
+	<!-- entfernen von Feldern, die durch ein gemeinsames Feld "pricingUntil" ersetzt werden -->
+	<sql dataSource="webdesk" failOnError="false">alter table PoTextModule drop column validfrom</sql>
+	<sql dataSource="webdesk" failOnError="false">alter table PoTextModule drop column validto</sql>
+	
+	
+</upgrade>

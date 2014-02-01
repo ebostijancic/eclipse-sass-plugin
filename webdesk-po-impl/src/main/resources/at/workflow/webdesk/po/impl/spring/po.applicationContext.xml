@@ -1,0 +1,1480 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:configurator="http://cocoon.apache.org/schema/configurator"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+  http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd
+  http://cocoon.apache.org/schema/configurator http://cocoon.apache.org/schema/configurator/cocoon-configurator-1.0.1.xsd">
+
+
+
+	<!-- *************************************************************************************************** 
+		PO Application Context ********************** For detailed information about 
+		configuration issues, see http://www.springframework.net/doc/reference/html/index.html 
+		or Transaction Manager | PO - Implementation (PoImpl) |...| Interceptor (Logging) 
+		(PoAuditLog) (same interceptor is used for all DAO's) |...| DAO's (PoPerson, 
+		PoGroup,...) ***************************************************************************************************** -->
+
+
+	<!-- this imports are for convenience, that a single import of po.applicationContext 
+		is enough -->
+	<import resource="po-caches.xml" />
+	<import resource="po-daos.xml" />
+	<import resource="po-utils.xml" />
+	<import resource="po-converters.xml" />
+	<import resource="po-licence-configs.xml" />
+	<import resource="po-password.xml" />
+
+	<!-- Module Service -->
+	<bean id="PoModuleUpdateService" class="at.workflow.webdesk.po.impl.PoModuleUpdateServiceImpl"
+		init-method="init">
+		<property name="moduleService" ref="PoModuleService" />
+		<property name="queryUtils" ref="PoQueryUtils" />
+		<property name="daoJdbcUtil" ref="DaoJdbcUtil" />
+	</bean>
+
+
+	<!-- Registration bean -->
+	<bean id="PoRegistrationBean_po" class="at.workflow.webdesk.po.model.PoRegistrationBean"
+		scope="singleton">
+
+		<!-- the module number of this module (-> upgrade scripts) -->
+		<property name="versionNumber">
+			<value>110</value>
+		</property>
+
+		<property name="folderOfPackage">
+			<value>po</value>
+		</property>
+		<property name="registerActions">
+			<list>
+				<value>classpath*:/at/workflow/webdesk/po/actions/*/act-descr.xml</value>
+				<value>classpath*:/at/workflow/webdesk/custom/actions/*/act-descr.xml</value>
+				<value>./custom/actions/*/act-descr.xml</value>
+			</list>
+		</property>
+		<property name="registerJobs">
+			<list>
+				<value>classpath*:/at/workflow/webdesk/po/jobs/*/job-descr.xml</value>
+				<value>classpath*:/at/workflow/webdesk/custom/jobs/*/job-descr.xml</value>
+			</list>
+		</property>
+		<property name="registerUpdateScripts">
+			<list>
+				<value>classpath*:/at/workflow/webdesk/po/impl/update/*/*.xml</value>
+			</list>
+		</property>
+
+		<property name="registerConfigs">
+			<list>
+				<value>classpath*:/at/workflow/webdesk/po/configs/**/*.xml</value>
+			</list>
+		</property>
+
+		<property name="registerJobConfigs">
+			<list>
+				<value>classpath*:/at/workflow/webdesk/po/jobs/configs/**/*.xml</value>
+			</list>
+		</property>
+
+		<property name="registerActionFlowScripts">
+			<list>
+				<value>classpath*:/at/workflow/webdesk/po/actions/*/*.js</value>
+				<value>./custom/actions/*/*.js</value>
+			</list>
+		</property>
+		<property name="registerModuleFlowScripts">
+			<!-- order of this list is important ! -->
+			<list>
+				<value>classpath:/at/workflow/webdesk/po/actions/ImportClasses.js</value>
+				<value>classpath:/at/workflow/webdesk/po/actions/PoGlobals.js</value>
+				<value>classpath:/at/workflow/webdesk/po/actions/Form.js</value>
+				<value>classpath:/at/workflow/webdesk/po/actions/FormHelpers.js</value>
+				<value>classpath:/at/workflow/webdesk/po/actions/Flow.js</value>
+				<value>classpath:/at/workflow/webdesk/po/actions/ExecActions.js</value>
+				<value>classpath:/at/workflow/webdesk/po/actions/getSelectionList.js</value>
+				<value>classpath:/at/workflow/webdesk/po/actions/ListHelpers.js</value>
+				<value>classpath:/at/workflow/webdesk/po/actions/LogHelpers.js</value>
+				<value>classpath:/at/workflow/webdesk/po/actions/jsLibraries/dojo.js</value>
+				<value>classpath:/at/workflow/webdesk/po/actions/actionhandler/*.js</value>
+				<value>classpath:/at/workflow/webdesk/po/webclient/actionhandler/*.js</value>
+			</list>
+		</property>
+
+		<property name="syncTextModules">
+			<list>
+				<value>classpath*:/at/workflow/webdesk/po/actions/i18n.xml</value>
+				<value>classpath*:/at/workflow/webdesk/po/actions/**/i18n.xml</value>
+				<value>classpath*:/at/workflow/webdesk/po/connector/*/i18n.xml</value>
+				<value>classpath*:/at/workflow/webdesk/po/jobs/*/i18n.xml</value>
+				<value>classpath*:/at/workflow/webdesk/tools/forms/selectionList/i18n.xml</value>
+				<value>classpath*:/at/workflow/webdesk/po/converter/i18n.xml</value>
+				<value>classpath*:/at/workflow/webdesk/po/impl/adminactions/i18n.xml</value>
+			</list>
+		</property>
+
+		<property name="registerConnectors">
+			<list>
+				<value>classpath*:/at/workflow/webdesk/po/connector/**/connector-descr.xml</value>
+			</list>
+		</property>
+
+		<property name="registerHelpMessages">
+			<list>
+				<value>classpath*:/at/workflow/webdesk/po/actions/*/helpMessage.xml</value>
+			</list>
+		</property>
+
+		<property name="implFolder">
+			<value>impl</value>
+		</property>
+
+		<property name="beanPropertyPasswordList">
+			<list>
+				<value>smtpServerPassword</value>
+				<value>AuthenticationOptions.sysAdminPassword</value>
+				<value>AuthenticationLDAP.ldapPassword</value>
+			</list>
+		</property>
+
+		<!-- not needed cause we have a default now <property name="annotatedClasses"> 
+			<value>classpath*:/at/workflow/webdesk/po/model/*.class</value> </property> -->
+	</bean>
+
+
+
+	<bean id="HistorizationTimelineHelper"
+		class="at.workflow.webdesk.po.impl.HistorizationTimelineHelperImpl" />
+
+	<bean id="HistorizationTimelineRepairer" scope="prototype"
+		class="at.workflow.webdesk.po.impl.HistorizationTimelineRepairerImpl">
+		<property name="helper">
+			<ref bean="HistorizationTimelineHelper" />
+		</property>
+	</bean>
+
+	<bean id="PoQueryUtils" class="at.workflow.webdesk.po.impl.daos.PoQueryUtilsImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="PoMailServerConfiguration" class="at.workflow.tools.mail.MailServerConfiguration">
+		<property name="userName">
+			<value></value>
+		</property>
+		<property name="password">
+			<value></value>
+		</property>
+		<property name="adress">
+			<value></value>
+		</property>
+		<property name="port">
+			<value>25</value>
+		</property>
+		<property name="defaultSender">
+			<value>webdesk@workflow.at</value>
+		</property>
+	</bean>
+
+	<bean id="PoMailServiceTarget" class="at.workflow.tools.mail.MailServiceImpl">
+		<property name="configuration" ref="PoMailServerConfiguration" />
+		<property name="active" value="true" />
+	</bean>
+
+	<!-- Weave proxy around Mailservice, so that property inspection/injection 
+		by PoBeanPropertyService works also Logging interceptors are present around 
+		services. -->
+	<bean id="PoMailService" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="interceptorNames">
+			<list>
+				<value>PoMailServiceTarget</value>
+			</list>
+		</property>
+	</bean>
+
+
+	<configurator:bean-map name="PoRegistrationBeanMap"
+		type="at.workflow.webdesk.po.model.PoRegistrationBean" />
+
+
+	<configurator:bean-map name="SpecificAdminActionMap"
+		type="at.workflow.webdesk.po.SpecificAdminAction" />
+
+
+	<bean id="PoCacheProviderFacade" class="at.workflow.webdesk.tools.cache.CustomEhCacheFacade">
+		<property name="cacheManager" ref="CacheManager" />
+		<property name="cacheHibernateUtils" ref="PoCacheHibernateUtils" />
+	</bean>
+
+	<bean id="LicenceReader" class="at.workflow.webdesk.po.impl.licence.LicenceReaderImpl" />
+
+
+	<bean id="SpecificClassRunner" class="at.workflow.webdesk.po.impl.SpecificClassRunner" />
+
+	<!-- Can make unserialized objects serialized -->
+	<!--bean id="serializableFactory" class="org.springmodules.cache.serializable.XStreamSerializableFactory" 
+		/ fails with error: java.lang.SecurityException: sealing violation: can't 
+		seal package javax.security.auth: already loaded actually we serialized our 
+		model objects -> best solution for this problem. But maybe we want to synchronize 
+		other objects that are not in our scope. then we should use this -->
+
+
+	<bean id="LockController" class="at.workflow.webdesk.po.impl.LockController">
+		<property name="cacheManager" ref="CacheManager" />
+		<property name="minToLive">
+			<value>3</value>
+		</property>
+	</bean>
+
+
+
+	<bean id="PoOptions" class="at.workflow.webdesk.po.model.PoOptions">
+		<!-- add placeHolder for props -->
+		<property name="pathToWelcomeLogo">
+			<value />
+		</property>
+		<property name="pathToStaticPages">
+			<value />
+		</property>
+		<property name="firstAction">
+			<value />
+		</property>
+		<property name="progressOpacityInPercent">
+			<value />
+		</property>
+		<property name="roleNameForJsonpWebServiceCalls" value="" /> <!-- do not delete, is placeholder -->
+
+		<property name="jsErrorHandling" value="true" />
+		<property name="clusterNodes">
+			<list>
+				<value>ClusterNode1</value>
+			</list>
+		</property>
+		<property name="allowUserDeputy" value="false" />
+		<property name="hideContextMenu" value="false" />
+		<property name="allowSkins" value="false" />
+		<property name="skins">
+			<list>
+				<value>default=layoutTemplate</value>
+				<value>simple=simpleLayoutTemplate</value>
+			</list>
+		</property>
+		<property name="settings" ref="org.apache.cocoon.configuration.Settings" />
+		<property name="enableJsonpWebServiceCalls" value="false" />
+		<property name="enableMulticlientConstraints" value="false" />
+		<property name="enableEmbeddedTabs" value="false" />
+
+	</bean>
+
+	<bean id="ExpressionTreeService" class="at.workflow.tools.expressiontree.ExpressionTreeService"></bean>
+
+	<bean id="CocoonHelper" class="at.workflow.webdesk.po.impl.util.CocoonHelper">
+		<property name="settings" ref="org.apache.cocoon.configuration.Settings" />
+	</bean>
+
+
+	<!-- Dependency Injection and Transaction Management The dependency injection 
+		for the service classes (PoRoleService, PoOrganisationService ,PoActionService, 
+		and PoUtilService) which are referenced by the transaction manager which 
+		is in return responsible (self-explanatory) for the transaction management. -->
+
+	<bean id="PoUtilServiceTarget" class="at.workflow.webdesk.po.impl.PoUtilServiceImpl"
+		init-method="init">
+		<property name="queryPageDAO" ref="PoQueryPageDAO" />
+		<property name="criteriaPageDAO" ref="PoCriteriaPageDAO" />
+		<property name="listPageDAO" ref="PoListPageDAO" />
+		<property name="queryUtils" ref="PoQueryUtils" />
+		<property name="organisationService" ref="PoOrganisationService" />
+	</bean>
+
+	<!-- PoUtilService does not need Transaction management -->
+	<bean id="PoUtilService" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="interceptorNames">
+			<list>
+				<value>PoUtilServiceTarget</value>
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="PoRoleServiceTarget" class="at.workflow.webdesk.po.impl.PoRoleServiceImpl">
+
+		<property name="orgService" ref="PoOrganisationService" />
+
+		<property name="roleDAO" ref="PoRoleDAO" />
+		<property name="roleDeputyDAO" ref="PoRoleDeputyDAO" />
+		<property name="roleCompetenceDAO" ref="PoRoleCompetenceDAO" />
+		<property name="roleHolderDAO" ref="PoRoleHolderDAO" />
+		<property name="roleHolderPersonDAO" ref="PoRoleHolderPersonDAO" />
+		<property name="roleHolderGroupDAO" ref="PoRoleHolderGroupDAO" />
+		<property name="roleHolderDynamicDAO" ref="PoRoleHolderDynamicDAO" />
+
+		<property name="actionDAO" ref="PoActionDAO" />
+		<property name="options" ref="PoOptions" />
+	</bean>
+
+	<bean id="PoOrganisationServiceTarget" class="at.workflow.webdesk.po.impl.PoOrganisationServiceImpl">
+		<property name="clientDAO" ref="PoClientDAO" />
+		<property name="orgStructureDAO" ref="PoOrgStructureDAO" />
+		<property name="groupDAO" ref="PoGroupDAO" />
+		<property name="personDAO" ref="PoPersonDAO" />
+		<property name="personGroupDAO" ref="PoPersonGroupDAO" />
+		<property name="personImagesDAO" ref="PoPersonImagesDAO" />
+		<property name="roleDAO" ref="PoRoleDAO" />
+		<property name="roleHolderDAO" ref="PoRoleHolderDAO" />
+		<property name="roleHolderPersonDAO" ref="PoRoleHolderPersonDAO" />
+		<property name="roleHolderGroupDAO" ref="PoRoleHolderGroupDAO" />
+		<property name="passwordService" ref="PoPasswordService" />
+		<property name="roleCompetenceDAO" ref="PoRoleCompetenceDAO" />
+		<property name="actionDAO" ref="PoActionDAO" />
+		<property name="historizationTimelineHelper" ref="HistorizationTimelineHelper"></property>
+		<property name="headerText">
+			<value>PersonalNr: $getEmployeeId$</value>
+		</property>
+		<property name="allowOnlySingleCostCenterAssignment">
+			<value>true</value>
+		</property>
+		<property name="generalDAO" ref="PoGeneralDAO" />
+		<property name="personBankAccountDAO" ref="PoPersonBankAccountDAO" />
+		<property name="timelineRepairer" ref="HistorizationTimelineRepairer" />
+		<property name="groupHierarchyCache" ref="PoGroupHierarchyCacheBean" />
+		<property name="sysAdminUserInfo" ref="SysAdminUserInfo" />
+		<property name="poSearchIndexService" ref="PoSearchService" />
+	</bean>
+
+	<bean id="PoActionServiceTarget" class="at.workflow.webdesk.po.impl.PoActionServiceImpl">
+		<property name="actionDAO" ref="PoActionDAO" />
+		<property name="textModuleDAO" ref="PoTextModuleDAO" />
+		<property name="actionCacheDAO" ref="PoActionCacheDAO" />
+		<property name="permissionService" ref="PoActionPermissionService" />
+		<property name="languageService" ref="PoLanguageService" />
+		<property name="orgService" ref="PoOrganisationService" />
+		<property name="roleService" ref="PoRoleService" />
+		<property name="fileService" ref="PoFileService" />
+		<property name="moduleService" ref="PoModuleService" />
+		<property name="cocoonHelper" ref="CocoonHelper" />
+		<property name="queryUtils" ref="PoQueryUtils" />
+		<property name="xpathTools" ref="XPathTools" />
+
+		<property name="softValues">
+			<list>
+				<value>caption</value>
+				<value>description</value>
+				<value>image</value>
+				<value>imageSet</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="PoActionPermissionServiceTarget"
+		class="at.workflow.webdesk.po.impl.PoActionPermissionServiceImpl">
+		<property name="actionDAO" ref="PoActionDAO" />
+		<property name="groupDAO" ref="PoGroupDAO" />
+		<!-- following is a cyclic dependency and cannot be processed by Spring -->
+		<!--property name="actionService" ref="PoActionService"/ -->
+		<property name="orgService" ref="PoOrganisationService" />
+		<property name="roleService" ref="PoRoleService" />
+		<property name="cacheManager" ref="CacheManager" />
+		<!-- is required to get the sysadmin username and password -->
+		<property name="sysAdminUserInfo" ref="SysAdminUserInfo" />
+		<property name="licenceActionService" ref="PoLicenceActionService" />
+		<property name="personActionPermissionCache" ref="PoPersonActionPermissionCacheBean" />
+	</bean>
+
+	<bean id="PoLicenceActionServiceTarget" class="at.workflow.webdesk.po.impl.PoLicenceActionServiceImpl">
+		<property name="actionDAO" ref="PoActionDAO" />
+		<property name="generalDAO" ref="PoGeneralDAO" />
+		<property name="objectCategoryMembershipCache" ref="PoObjectCategoryMembershipCacheBean" />
+		<property name="actionCache" ref="PoLicenceActionCacheBean" />
+	</bean>
+
+	<bean id="PoLanguageServiceTarget" class="at.workflow.webdesk.po.impl.PoLanguageServiceImpl"
+		init-method="init">
+		<property name="languageDAO" ref="PoLanguageDAO" />
+		<property name="moduleService" ref="PoModuleService" />
+		<property name="textModuleDAO" ref="PoTextModuleDAO" />
+		<property name="cacheManager" ref="CacheManager" />
+		<property name="standardDefaultLangCode">
+			<value>de</value>
+		</property>
+	</bean>
+
+
+	<bean id="PoMenuServiceTarget" class="at.workflow.webdesk.po.impl.PoMenuServiceImpl"
+		init-method="init">
+		<property name="menuDAO" ref="PoMenuDAO" />
+		<property name="personDAO" ref="PoPersonDAO" />
+		<property name="languageService" ref="PoLanguageService" />
+		<property name="moduleService" ref="PoModuleService" />
+		<property name="actionService" ref="PoActionService" />
+		<property name="permissionService" ref="PoActionPermissionService" />
+		<property name="cacheManager" ref="CacheManager" />
+		<property name="sysAdminUserInfo" ref="SysAdminUserInfo" />
+		<property name="registrationBeanMap" ref="PoRegistrationBeanMap" />
+		<property name="extractPermissionBeforeHand" value="false" />
+		<property name="mergeMenuFoldersWithSameName" value="false" />
+	</bean>
+
+	<bean id="PoMenuTreeServiceTarget" class="at.workflow.webdesk.po.impl.PoMenuTreeServiceImpl">
+		<property name="menuItemBaseDAO" ref="PoMenuItemBaseDAO" />
+		<property name="menuTreeBaseDAO" ref="PoMenuTreeBaseDAO" />
+		<property name="menuItemActionLinkDAO" ref="PoMenuItemActionLinkDAO" />
+		<property name="menuItemFolderDAO" ref="PoMenuItemFolderDAO" />
+		<property name="menuItemTemplateLinkDAO" ref="PoMenuItemTemplateLinkDAO" />
+		<property name="menuTreeClientDAO" ref="PoMenuTreeClientDAO" />
+		<property name="menuTreeTemplateDAO" ref="PoMenuTreeTemplateDAO" />
+		<property name="personDAO" ref="PoPersonDAO" />
+		<property name="permissionService" ref="PoActionPermissionService" />
+		<property name="actionService" ref="PoActionService" />
+		<property name="cacheManager" ref="CacheManager" />
+	</bean>
+
+
+	<bean id="PoModuleServiceTarget" class="at.workflow.webdesk.po.impl.PoModuleServiceImpl">
+		<property name="moduleDAO" ref="PoModuleDAO" />
+	</bean>
+
+	<bean id="PoGeneralDbServiceTarget" class="at.workflow.webdesk.po.impl.PoGeneralDbServiceImpl">
+		<property name="generalDAO" ref="PoGeneralDAO" />
+	</bean>
+
+	<bean id="PoGeneralDbService" parent="PoBaseTransactionProxy">
+		<property name="target" ref="PoGeneralDbServiceTarget" />
+	</bean>
+
+	<bean id="PoGeneralSqlService" class="at.workflow.webdesk.po.impl.PoGeneralSqlServiceImpl"
+		scope="singleton" />
+
+	<bean id="PoDataSourceService" parent="PoBaseTransactionProxy">
+		<property name="target" ref="PoDataSourceServiceTarget" />
+	</bean>
+
+	<bean id="PoDataSourceServiceTarget" class="at.workflow.webdesk.po.impl.PoDataSourceServiceImpl"
+		scope="singleton">
+		<property name="dataSourceDao" ref="PoDataSourceDefinitionDAO" />
+		<property name="webdesk" ref="webdesk-DataSource" />
+		<!-- property name="shark" ref="SharkDataSource"/> cannot be referenced 
+			here because JUnit tests do not define such a bean and thus would fail -->
+		<property name="sqlService" ref="PoGeneralSqlService" />
+	</bean>
+
+
+
+	<bean id="PoJobServiceTarget" class="at.workflow.webdesk.po.impl.PoJobServiceImpl">
+		<property name="jobTriggerDAO" ref="PoJobTriggerDAO" />
+		<property name="jobDAO" ref="PoJobDAO" />
+		<property name="fileService" ref="PoFileService" />
+		<property name="moduleService" ref="PoModuleService" />
+		<property name="poOptions" ref="PoOptions" />
+		<property name="active" value="true" />
+		<property name="noOfSchedulerThreads">
+			<value>1</value>
+		</property>
+
+	</bean>
+
+	<bean id="PoRegistrationServiceTarget" class="at.workflow.webdesk.po.impl.PoRegistrationServiceImpl">
+		<property name="actionService" ref="PoActionService" />
+		<property name="fileService" ref="PoFileService" />
+		<property name="jobService" ref="PoJobService" />
+		<property name="languageService" ref="PoLanguageService" />
+		<property name="keyValueService" ref="PoKeyValueService" />
+		<property name="connectorService" ref="PoConnectorService" />
+		<property name="moduleService" ref="PoModuleService" />
+		<property name="moduleUpdateService" ref="PoModuleUpdateService" />
+		<property name="helpMessageService" ref="PoHelpMessageService" />
+	</bean>
+
+	<bean id="PoRegistrationService"
+		class="org.springmodules.cache.interceptor.proxy.CacheProxyFactoryBean">
+
+		<property name="cacheKeyGenerator" ref="HashCodeKeyGenerator" />
+		<property name="cacheProviderFacade" ref="PoCacheProviderFacade" />
+
+		<property name="cachingModels">
+			<props>
+				<!-- we don't want to cache anything here, we just want to flush... -->
+				<prop key="dummy*">cacheName=at.workflow.webdesk.po.PERSONCACHE</prop>
+			</props>
+		</property>
+
+		<property name="flushingModels">
+			<props>
+				<!-- be sure we flush all changed artifacts, which are cached: textmodules, 
+					actions, configs, menus... -->
+				<prop key="register*">cacheNames=at.workflow.webdesk.po.TEXTMODULECACHE,at.workflow.webdesk.po.ACTIONCACHE,at.workflow.webdesk.po.HELPMESSAGECACHE,at.workflow.webdesk.po.CONFIGFILECACHE,at.workflow.webdesk.po.MENUCACHE</prop>
+				<prop key="runRegistration*">cacheNames=at.workflow.webdesk.po.TEXTMODULECACHE,at.workflow.webdesk.po.ACTIONCACHE,at.workflow.webdesk.po.HELPMESSAGECACHE,at.workflow.webdesk.po.CONFIGFILECACHE,at.workflow.webdesk.po.MENUCACHE</prop>
+			</props>
+		</property>
+		<property name="target" ref="PoRegistrationServiceTarget" />
+	</bean>
+
+	<bean id="BeanNameProxyCreatorForRegService"
+		class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<property name="beanNames">
+			<value>PoRegistrationService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>hibernateInterceptor</value>
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="PoConnectorSyncService" class="at.workflow.webdesk.po.impl.PoConnectorSyncServiceImpl">
+		<property name="connectorService" ref="PoConnectorService" />
+		<property name="scriptingService" ref="PoScriptingService" />
+	</bean>
+
+	<bean id="PoConnectorTarget" class="at.workflow.webdesk.po.impl.PoConnectorServiceImpl">
+		<property name="fileService" ref="PoFileService" />
+		<property name="connectorDao" ref="PoConnectorDAO" />
+	</bean>
+
+	<bean id="PoKeyValueServiceTarget" class="at.workflow.webdesk.po.impl.PoKeyValueServiceImpl">
+		<property name="keyValueTypeDAO" ref="PoKeyValueTypeDAO" />
+		<property name="languageService" ref="PoLanguageService" />
+		<property name="textModuleDAO" ref="PoTextModuleDAO" />
+	</bean>
+
+	<bean id="PoBeanPropertyServiceTarget" class="at.workflow.webdesk.po.impl.PoBeanPropertyServiceImpl"
+		init-method="init">
+
+		<property name="beanPropertyDAO" ref="PoBeanPropertyDAO" />
+
+		<property name="moduleService" ref="PoModuleService" />
+
+		<property name="classesNegativeList">
+			<set>
+				<value>at.workflow.webdesk.tools.cache.CustomEhCacheFactoryBean</value>
+				<value>at.workflow.webdesk.po.impl.PoAuditLogInterceptor</value>
+				<value>org.apache.commons.dbcp.BasicDataSource</value>
+				<value>org.apache.tomcat.dbcp.dbcp.BasicDataSource</value>
+				<value>at.workflow.webdesk.po.model.PoRegistrationBean</value>
+				<value>at.workflow.webdesk.tools.hibernate.ExtLocalSessionFactoryBean</value>
+				<value>at.workflow.webdesk.po.impl.licence.PoLicenceCheckOfAction</value>
+				<value>at.workflow.webdesk.tools.interceptors.ExceptionInterceptor</value>
+				<value>org.springframework.aop.interceptor.PerformanceMonitorInterceptor</value>
+				<value>org.springframework.aop.interceptor.CustomizableTraceInterceptor</value>
+				<value>org.springframework.aop.support.NameMatchMethodPointcutAdvisor</value>
+			</set>
+		</property>
+
+		<property name="negativeList">
+			<set>
+				<value>lookupStubOnStartup</value>
+				<value>refreshStubOnConnectFailure</value>
+				<value>serviceInterface</value>
+				<value>serviceUrl</value>
+				<value>interceptorNames</value>
+				<value>proxyInterfaces</value>
+				<value>schemaUpdate</value>
+				<value>softValues</value>
+				<value>jdbcConnectionDriver</value>
+				<value>jdbcConnectionURL</value>
+				<value>jdbcConnectionUser</value>
+				<value>jdbcConnectionPassword</value>
+				<value>availableConnectors</value>
+				<value>negativeList</value>
+				<value>classesNegativeList</value>
+				<value>singleSession</value>
+				<value>versionNumber</value>
+				<value>servletServiceInvocation</value>
+				<value>PoModuleUpdateService.runRegistration</value>
+				<value>PoModuleUpdateService.modules</value>
+				<value>configLocation</value>
+				<value>WfTarget.engineName</value>
+				<value>beanPropertyPasswordList</value>
+				<value>serviceName</value>
+				<value>mountPath</value>
+				<value>contextPath</value>
+				<value>interceptorNames</value>
+				<value>beanNames</value>
+				<value>DaoJdbcUtil.dialect</value>
+				<value>hasProperties</value>
+				<value>clusterNode</value>
+
+				<!-- excluded specific props -->
+				<value>SysAdminUserInfo.targetName</value>
+				<value>PoJobServiceTarget.active</value>
+
+				<!-- excluded Beans -->
+				<value>PoRegistrationBean.*</value>
+				<value>PoRegistrationBeanMap.*</value>
+				<value>PropertiesConfig.*</value>
+				<value>PropertiesOverrideConfig.*</value>
+				<value>GeneralLogInterceptorProxyCreator4ActionHandlers.*</value>
+				<value>servletServiceInvocation.*</value>
+				<value>hibernateInterceptor.*</value>
+				<value>PoBeanPropertyPointcutAdvisor.*</value>
+				<value>SpecificAdminActionMap.*</value>
+				<value>PoBeanPropertyCollector.*</value>
+				<value>PoLicenceInterceptor.throwExceptionOnViolation</value>
+				<value>ContinuationsManagerProxyCreator.*</value>
+
+			</set>
+		</property>
+	</bean>
+
+
+	<bean id="PoSystemMessageTarget" class="at.workflow.webdesk.po.impl.PoSystemMessageServiceImpl">
+		<property name="systemMessageDAO" ref="PoSystemMessageDAO" />
+		<property name="daysToLive">
+			<value>0</value>
+		</property>
+	</bean>
+
+
+	<bean id="PoFileServiceTarget" class="at.workflow.webdesk.po.impl.PoFileServiceImpl">
+		<property name="fileDAO" ref="PoFileDAO" />
+	</bean>
+
+
+
+
+	<bean id="PoHelpMessageServiceTarget" class="at.workflow.webdesk.po.impl.PoHelpMessageServiceImpl">
+		<property name="actionService" ref="PoActionService" />
+		<property name="languageService" ref="PoLanguageService" />
+		<property name="helpMessageDAO" ref="PoHelpMessageDAO" />
+	</bean>
+
+
+
+	<!--********************************************************** | Interceptor 
+		Definitions | ************************************************************** -->
+	<!-- Audit Log Interceptor ********************* is responsible to log changes 
+		of the fields of interest which are declared in the database table PoAuditLogDefinition 
+		Changes are logged in the PoAuditionLog or rather in the corresponding database 
+		table functionConstraints are responsible to distinguish between functions 
+		that need to be logged or not. For example the "save" value allows functions 
+		with the save string at the beginning to be logged. No * are required (in 
+		fact with * the functions won't be logged) -->
+	<bean id="PoAuditLogInterceptor" class="at.workflow.webdesk.po.impl.PoAuditLogInterceptor">
+		<property name="auditLogDao" ref="PoAuditLogDao" />
+		<property name="functionConstraints">
+			<list>
+				<value>save</value>
+			</list>
+		</property>
+	</bean>
+
+
+
+
+	<!--********************************************************** | Interceptor 
+		PROXY Definitions | ************************************************************** -->
+
+	<bean id="PoOrganisationServiceInterceptor" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>at.workflow.webdesk.po.PoOrganisationService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<!-- value>PoAuditLogInterceptor</value -->
+				<value>PoLicenceInterceptor</value>
+				<value>PoOrganisationServiceTarget</value>
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="PoActionServiceInterceptor" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>at.workflow.webdesk.po.PoActionService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<!-- value>PoAuditLogInterceptor</value -->
+				<value>PoLicenceInterceptor</value>
+				<value>PoActionServiceTarget</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="PoActionPermissionServiceInterceptor" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>at.workflow.webdesk.po.PoActionPermissionService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<!-- value>PoAuditLogInterceptor</value -->
+				<value>PoLicenceInterceptor</value>
+				<value>PoActionPermissionServiceTarget</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="PoRoleServiceInterceptor" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>at.workflow.webdesk.po.PoRoleService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<!-- value>PoAuditLogInterceptor</value -->
+				<value>PoLicenceInterceptor</value>
+				<value>PoRoleServiceTarget</value>
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="PoImportExportService" class="at.workflow.webdesk.po.impl.PoImportExportServiceImpl">
+		<property name="orgService" ref="PoOrganisationService" />
+		<property name="roleService" ref="PoRoleService" />
+	</bean>
+
+	<!--********************************************************** | TRANSACTION 
+		DECLARATIONS | |************************************************************ -->
+	<!-- Transaction Management of the PoOrganisationService -->
+	<bean id="CachedPoOrganisationServiceTarget2" parent="PoBaseTransactionProxy">
+		<property name="target" ref="PoOrganisationServiceInterceptor" />
+	</bean>
+
+	<bean id="CachedPoOrganisationServiceTarget1"
+		class="org.springmodules.cache.interceptor.proxy.CacheProxyFactoryBean">
+		<!-- this uses a simple cache key generator (string generated of methodname 
+			and parameter1) -->
+		<property name="cacheKeyGenerator" ref="SimpleCacheKeyGenerator" />
+		<property name="cacheProviderFacade" ref="PoCacheProviderFacade" />
+		<property name="cachingModels">
+			<props>
+				<prop key="findPersonByEmployeeId">cacheName=at.workflow.webdesk.po.PERSONCACHE</prop>
+				<prop key="findPersonByEmail">cacheName=at.workflow.webdesk.po.PERSONCACHE</prop>
+				<prop key="findPersonByTaId">cacheName=at.workflow.webdesk.po.PERSONCACHE</prop>
+				<prop key="findPersonByUserName">cacheName=at.workflow.webdesk.po.PERSONCACHE</prop>
+			</props>
+		</property>
+		<property name="target" ref="CachedPoOrganisationServiceTarget2" />
+	</bean>
+
+	<bean id="PoOrganisationService"
+		class="org.springmodules.cache.interceptor.proxy.CacheProxyFactoryBean">
+
+		<property name="cacheKeyGenerator" ref="HashCodeKeyGenerator" />
+		<property name="cacheProviderFacade" ref="PoCacheProviderFacade" />
+
+		<property name="cachingModels">
+			<props>
+				<prop key="dummy">cacheName=at.workflow.webdesk.po.PERSONCACHE</prop>
+				<prop key="loadAllPersons">cacheName=at.workflow.webdesk.po.PERSONCACHE</prop>
+				<prop key="findPersonsOfClient">cacheName=at.workflow.webdesk.po.PERSONCACHE</prop>
+				<prop key="getResolvedHeaderText">cacheName=at.workflow.webdesk.po.PERSONCACHE</prop>
+
+				<prop key="findGroupBy*">cacheName=at.workflow.webdesk.po.GROUPCACHE</prop>
+				<prop key="findGroups*">cacheName=at.workflow.webdesk.po.GROUPCACHE</prop>
+				<prop key="findAllChildGroupsFlat">cacheName=at.workflow.webdesk.po.GROUPCACHE</prop>
+				<prop key="findAvailableChildGroups">cacheName=at.workflow.webdesk.po.GROUPCACHE</prop>
+				<prop key="findAvailableParentGroups">cacheName=at.workflow.webdesk.po.GROUPCACHE</prop>
+				<prop key="findChildGroups">cacheName=at.workflow.webdesk.po.GROUPCACHE</prop>
+				<prop key="findChildGroupsF">cacheName=at.workflow.webdesk.po.GROUPCACHE</prop>
+				<prop key="findChildGroupUids">cacheName=at.workflow.webdesk.po.GROUPCACHE</prop>
+				<prop key="findCurrentGroups">cacheName=at.workflow.webdesk.po.GROUPCACHE</prop>
+				<prop key="findNotHierarchicalGroupsOfPerson">cacheName=at.workflow.webdesk.po.GROUPCACHE</prop>
+				<prop key="loadAllGroups">cacheName=at.workflow.webdesk.po.GROUPCACHE</prop>
+				<prop key="loadAllParentGroups">cacheName=at.workflow.webdesk.po.GROUPCACHE</prop>
+				<prop key="getOrgModelCached">cacheName=at.workflow.webdesk.po.GROUPCACHE</prop>
+				<prop key="getMaxDepthOfOrgStructure">cacheName=at.workflow.webdesk.po.GROUPCACHE</prop>
+				<prop key="getOrgHierarchy">cacheName=at.workflow.webdesk.po.GROUPCACHE</prop>
+				<prop key="getTopLevelGroupsOfOrgStructure">cacheName=at.workflow.webdesk.po.GROUPCACHE</prop>
+
+				<prop key="getPersonsHierarchicalGroup">cacheName=at.workflow.webdesk.po.GROUPMEMBERCACHE
+				</prop>
+				<prop key="isPersonActualMemberOfGroup">cacheName=at.workflow.webdesk.po.GROUPMEMBERCACHE
+				</prop>
+
+				<prop key="getParentGroup">cacheName=at.workflow.webdesk.po.GROUPCACHE</prop>
+			</props>
+		</property>
+		<property name="flushingModels">
+			<props>
+				<prop key="savePerson">cacheNames=at.workflow.webdesk.po.PERSONCACHE,at.workflow.webdesk.po.GROUPCACHE</prop>
+				<prop key="updatePerson">cacheNames=at.workflow.webdesk.po.PERSONCACHE</prop>
+				<prop key="deletePerson">cacheNames=at.workflow.webdesk.po.PERSONCACHE,at.workflow.webdesk.po.ROLEHOLDERCACHE</prop>
+				<prop key="deleteAndFlushPerson">cacheNames=at.workflow.webdesk.po.PERSONCACHE,at.workflow.webdesk.po.ROLEHOLDERCACHE</prop>
+				<prop key="changeValidityPersonGroupLink">cacheNames=at.workflow.webdesk.po.GROUPMEMBERCACHE,at.workflow.webdesk.po.ROLEHOLDERCACHE</prop>
+				<prop key="linkPerson2Group">cacheNames=at.workflow.webdesk.po.GROUPMEMBERCACHE,at.workflow.webdesk.po.ROLEHOLDERCACHE</prop>
+				<prop key="linkPersons2Group">cacheNames=at.workflow.webdesk.po.GROUPMEMBERCACHE,at.workflow.webdesk.po.ROLEHOLDERCACHE</prop>
+				<prop key="removePersonFromGroup">cacheNames=at.workflow.webdesk.po.GROUPMEMBERCACHE,at.workflow.webdesk.po.ROLEHOLDERCACHE</prop>
+				<prop key="deletePersonGroupLink">cacheNames=at.workflow.webdesk.po.GROUPMEMBERCACHE,at.workflow.webdesk.po.ROLEHOLDERCACHE</prop>
+				<prop key="deleteAndFlushPersonGroupLink">cacheNames=at.workflow.webdesk.po.GROUPMEMBERCACHE,at.workflow.webdesk.po.ROLEHOLDERCACHE</prop>
+				<prop key="deletePGWithoutConstraints">cacheNames=at.workflow.webdesk.po.GROUPMEMBERCACHE,at.workflow.webdesk.po.ROLEHOLDERCACHE</prop>
+				<prop key="removeGroupFromParentGroup">cacheNames=at.workflow.webdesk.po.GROUPCACHE,at.workflow.webdesk.po.GROUPHIERARCHYCACHE</prop>
+				<prop key="changeValidityParentGroupLink">cacheNames=at.workflow.webdesk.po.GROUPCACHE,at.workflow.webdesk.po.GROUPHIERARCHYCACHE</prop>
+				<prop key="saveGroup">cacheNames=at.workflow.webdesk.po.GROUPCACHE,at.workflow.webdesk.po.GROUPHIERARCHYCACHE</prop>
+				<prop key="saveParentGroup">cacheNames=at.workflow.webdesk.po.GROUPCACHE,at.workflow.webdesk.po.GROUPHIERARCHYCACHE</prop>
+				<prop key="saveOrgStructure">cacheNames=at.workflow.webdesk.po.GROUPCACHE</prop>
+				<prop key="deleteOrgStructure">cacheNames=at.workflow.webdesk.po.GROUPCACHE</prop>
+				<prop key="deleteAndFlushOrgStructure">cacheNames=at.workflow.webdesk.po.GROUPCACHE</prop>
+				<prop key="deleteGroup">cacheNames=at.workflow.webdesk.po.GROUPCACHE,at.workflow.webdesk.po.GROUPHIERARCHYCACHE</prop>
+				<prop key="deleteAndFlushGroup">cacheNames=at.workflow.webdesk.po.GROUPCACHE,at.workflow.webdesk.po.GROUPHIERARCHYCACHE</prop>
+				<prop key="setParentGroup">cacheNames=at.workflow.webdesk.po.GROUPCACHE,at.workflow.webdesk.po.GROUPHIERARCHYCACHE</prop>
+			</props>
+		</property>
+		<property name="target" ref="CachedPoOrganisationServiceTarget1" />
+	</bean>
+
+
+	<!-- Transaction Management of the PoRoleService -->
+	<bean id="CachedPoRoleServiceTarget" parent="PoBaseTransactionProxy">
+		<property name="target" ref="PoRoleServiceInterceptor" />
+	</bean>
+
+	<bean id="PoRoleService"
+		class="org.springmodules.cache.interceptor.proxy.CacheProxyFactoryBean">
+
+		<property name="cacheKeyGenerator" ref="HashCodeKeyGenerator" />
+		<property name="cacheProviderFacade" ref="PoCacheProviderFacade" />
+
+		<property name="cachingModels">
+			<props>
+				<prop key="findAllRoles">cacheName=at.workflow.webdesk.po.ROLECACHE</prop>
+				<prop key="loadAllRoles">cacheName=at.workflow.webdesk.po.ROLECACHE</prop>
+				<prop key="findRoleByName">cacheName=at.workflow.webdesk.po.ROLECACHE</prop>
+				<prop key="findRoleByNameAndGivenOrNullClient">cacheName=at.workflow.webdesk.po.ROLECACHE</prop>
+				<prop key="findRoleByParticipantId">cacheName=at.workflow.webdesk.po.ROLECACHE</prop>
+				<prop key="findAuthority">cacheName=at.workflow.webdesk.po.ROLEHOLDERCACHE</prop>
+				<prop key="findCompetence*">cacheName=at.workflow.webdesk.po.ROLEHOLDERCACHE</prop>
+				<prop key="findRoleCompetenceAll">cacheName=at.workflow.webdesk.po.ROLEHOLDERCACHE</prop>
+				<prop key="findRoleHolderDynamicF">cacheName=at.workflow.webdesk.po.ROLEHOLDERCACHE</prop>
+				<prop key="findRoles">cacheName=at.workflow.webdesk.po.ROLECACHE</prop>
+			</props>
+		</property>
+		<property name="flushingModels">
+			<props>
+				<prop key="saveRole">cacheNames=at.workflow.webdesk.po.ROLECACHE,at.workflow.webdesk.po.ROLEHOLDERCACHE</prop>
+				<prop key="deleteRole">cacheNames=at.workflow.webdesk.po.ROLECACHE,at.workflow.webdesk.po.ROLEHOLDERCACHE</prop>
+				<prop key="deleteAndFlushRole">cacheNames=at.workflow.webdesk.po.ROLECACHE,at.workflow.webdesk.po.ROLEHOLDERCACHE</prop>
+				<prop key="assignRole">cacheNames=at.workflow.webdesk.po.ROLEHOLDERCACHE</prop>
+				<prop key="assignRoleWithGroupCompetence">cacheNames=at.workflow.webdesk.po.ROLEHOLDERCACHE</prop>
+				<prop key="assignRoleWithPersonCompetence">cacheNames=at.workflow.webdesk.po.ROLEHOLDERCACHE</prop>
+				<prop key="changeValidityRHGroupLink">cacheNames=at.workflow.webdesk.po.ROLEHOLDERCACHE</prop>
+				<prop key="changeValidityRHPersonLink">cacheNames=at.workflow.webdesk.po.ROLEHOLDERCACHE</prop>
+				<prop key="saveRoleCompetence">cacheNames=at.workflow.webdesk.po.ROLEHOLDERCACHE</prop>
+				<prop key="deleteRoleCompetence">cacheNames=at.workflow.webdesk.po.ROLEHOLDERCACHE</prop>
+				<prop key="deleteAndFlushRoleHolder">cacheNames=at.workflow.webdesk.po.ROLEHOLDERCACHE</prop>
+				<prop key="deleteAndFlushRoleHolderGroupLink">cacheNames=at.workflow.webdesk.po.ROLEHOLDERCACHE</prop>
+				<prop key="deleteAndFlushRoleHolderPersonLink">cacheNames=at.workflow.webdesk.po.ROLEHOLDERCACHE</prop>
+				<prop key="generateDeputy">cacheNames=at.workflow.webdesk.po.ROLEHOLDERCACHE</prop>
+				<prop key="removeGroupFromRole">cacheNames=at.workflow.webdesk.po.ROLEHOLDERCACHE</prop>
+				<prop key="removePersonFromRole">cacheNames=at.workflow.webdesk.po.ROLEHOLDERCACHE</prop>
+			</props>
+		</property>
+		<property name="target" ref="CachedPoRoleServiceTarget" />
+	</bean>
+
+
+	<bean id="PoGeneralService" parent="PoBaseTransactionProxy">
+		<property name="target" ref="PoGeneralDAO" />
+	</bean>
+
+
+
+	<!-- Transaction Management of the PoLanguageService -->
+	<bean id="CachedPoLanguageServiceTarget" parent="PoBaseTransactionProxy">
+		<property name="target" ref="PoLanguageServiceTarget" />
+	</bean>
+
+	<!-- Caching Layer -->
+	<bean id="PoLanguageService"
+		class="org.springmodules.cache.interceptor.proxy.CacheProxyFactoryBean">
+		<property name="cacheKeyGenerator" ref="HashCodeKeyGenerator" />
+		<property name="cacheProviderFacade" ref="PoCacheProviderFacade" />
+		<property name="cachingModels">
+			<props>
+				<prop key="findLanguageByCode">cacheName=at.workflow.webdesk.po.model.PoLanguage</prop>
+				<prop key="findAllLanguages">cacheName=at.workflow.webdesk.po.model.PoLanguage</prop>
+				<prop key="loadAllLanguages">cacheName=at.workflow.webdesk.po.model.PoLanguage</prop>
+				<prop key="findDefaultLanguage">cacheName=at.workflow.webdesk.po.model.PoLanguage</prop>
+				<prop key="replaceTextModulesInDependenceList">cacheName=at.workflow.webdesk.po.model.PoLanguage</prop>
+				<prop key="replaceContainingReferences">cacheName=at.workflow.webdesk.po.model.PoLanguage</prop>
+				<prop key="insertParams">cacheName=at.workflow.webdesk.po.model.PoLanguage</prop>
+				<prop key="findCommonTextModules">cacheName=at.workflow.webdesk.po.TEXTMODULECACHE</prop>
+				<prop key="translate*">cacheName=at.workflow.webdesk.po.TEXTMODULECACHE</prop>
+				<prop key="findTextModule*">cacheName=at.workflow.webdesk.po.TEXTMODULECACHE</prop>
+				<prop key="findParentTextModule">cacheName=at.workflow.webdesk.po.TEXTMODULECACHE</prop>
+				<prop key="findStandardTextModules">cacheName=at.workflow.webdesk.po.TEXTMODULECACHE</prop>
+			</props>
+		</property>
+		<property name="flushingModels">
+			<props>
+				<prop key="init">cacheNames=at.workflow.webdesk.po.model.PoLanguage</prop>
+				<prop key="deleteAndFlushLanguage">cacheNames=at.workflow.webdesk.po.model.PoLanguage</prop>
+				<prop key="setUpdateOnVersionChange*">cacheNames=at.workflow.webdesk.po.TEXTMODULECACHE</prop>
+				<prop key="saveTextModule">cacheNames=at.workflow.webdesk.po.TEXTMODULECACHE</prop>
+				<prop key="saveAndRefreshTextModule">cacheNames=at.workflow.webdesk.po.TEXTMODULECACHE</prop>
+				<prop key="syncTextModule">cacheNames=at.workflow.webdesk.po.TEXTMODULECACHE</prop>
+				<prop key="updateTextModule*">cacheNames=at.workflow.webdesk.po.TEXTMODULECACHE</prop>
+				<prop key="writeTextModule*">cacheNames=at.workflow.webdesk.po.TEXTMODULECACHE</prop>
+				<prop key="deleteAndFlushTextModule">cacheNames=at.workflow.webdesk.po.TEXTMODULECACHE</prop>
+				<prop key="saveLanguage">cacheNames=at.workflow.webdesk.po.model.PoLanguage</prop>
+			</props>
+		</property>
+		<property name="target" ref="CachedPoLanguageServiceTarget" />
+	</bean>
+
+	<!-- Transaction Management of the PoActionService -->
+	<bean id="CachedPoActionServiceTarget" parent="PoBaseTransactionProxy">
+		<property name="target" ref="PoActionServiceInterceptor" />
+	</bean>
+
+	<bean id="PoActionService"
+		class="org.springmodules.cache.interceptor.proxy.CacheProxyFactoryBean">
+		<property name="cacheProviderFacade" ref="PoCacheProviderFacade" />
+		<property name="cacheKeyGenerator" ref="HashCodeKeyGenerator" />
+		<property name="cachingModels">
+			<props>
+				<prop key="findActionByURL">cacheName=at.workflow.webdesk.po.ACTIONCACHE</prop>
+				<prop key="findActionByNameAndType">cacheName=at.workflow.webdesk.po.ACTIONCACHE</prop>
+				<prop key="findActionByProcessDefId">cacheName=at.workflow.webdesk.po.ACTIONCACHE</prop>
+				<prop key="getLocationOfJs">cacheName=at.workflow.webdesk.po.ACTIONCACHE</prop>
+				<prop key="loadAllImageSets">cacheName=at.workflow.webdesk.po.STATIC</prop>
+				<prop key="getConfigFromAction">cacheName=at.workflow.webdesk.po.CONFIGFILECACHE</prop>
+			</props>
+		</property>
+		<property name="flushingModels">
+			<props>
+				<prop key="saveAction">cacheNames=at.workflow.webdesk.po.ACTIONCACHE</prop>
+				<prop key="deleteAction">cacheNames=at.workflow.webdesk.po.ACTIONCACHE</prop>
+				<prop key="deleteAndFlushAction">cacheNames=at.workflow.webdesk.po.ACTIONCACHE</prop>
+			</props>
+		</property>
+		<property name="target" ref="CachedPoActionServiceTarget" />
+	</bean>
+
+
+	<!-- Transaction Management of the PoActionPermissionService -->
+	<bean id="CachedPoActionPermissionServiceTarget" parent="PoBaseTransactionProxy">
+		<property name="target" ref="PoActionPermissionServiceInterceptor" />
+	</bean>
+
+	<bean id="PoActionPermissionService"
+		class="org.springmodules.cache.interceptor.proxy.CacheProxyFactoryBean">
+		<property name="cacheProviderFacade" ref="PoCacheProviderFacade" />
+		<property name="cacheKeyGenerator" ref="HashCodeKeyGenerator" />
+		<property name="cachingModels">
+			<props>
+				<!-- hasPersonPermissionForAction is cached inside the code! -->
+				<prop key="hasPersonPermissionToEdit*">cacheName=at.workflow.webdesk.po.PERMISSIONCACHE</prop>
+				<prop key="resolveViewPermissionsToListOfGroups">cacheName=at.workflow.webdesk.po.PERMISSIONCACHE</prop>
+				<prop key="resolveViewPermissionsToListOfPersons">cacheName=at.workflow.webdesk.po.PERMISSIONCACHE</prop>
+				<prop key="findViewPermissions">cacheName=at.workflow.webdesk.po.PERMISSIONCACHE</prop>
+			</props>
+		</property>
+		<property name="flushingModels">
+			<props>
+				<prop key="add*">cacheNames=at.workflow.webdesk.po.PERMISSIONCACHE,at.workflow.webdesk.po.PERSONACTIONPERMISSIONCACHE</prop>
+				<prop key="change*">cacheNames=at.workflow.webdesk.po.PERMISSIONCACHE,at.workflow.webdesk.po.PERSONACTIONPERMISSIONCACHE</prop>
+				<prop key="assign*">cacheNames=at.workflow.webdesk.po.PERMISSIONCACHE,at.workflow.webdesk.po.PERSONACTIONPERMISSIONCACHE</prop>
+				<prop key="saveAPermission">cacheNames=at.workflow.webdesk.po.PERMISSIONCACHE,at.workflow.webdesk.po.PERSONACTIONPERMISSIONCACHE</prop>
+				<prop key="deleteAPermission">cacheNames=at.workflow.webdesk.po.PERMISSIONCACHE,at.workflow.webdesk.po.PERSONACTIONPERMISSIONCACHE</prop>
+				<prop key="removeAction*">cacheNames=at.workflow.webdesk.po.PERMISSIONCACHE,at.workflow.webdesk.po.PERSONACTIONPERMISSIONCACHE</prop>
+			</props>
+		</property>
+		<property name="target" ref="CachedPoActionPermissionServiceTarget" />
+	</bean>
+
+
+	<!-- Transaction Management of the PoHelpMessageService -->
+	<bean id="CachedPoHelpMessageServiceTarget" parent="PoBaseTransactionProxy">
+		<property name="target" ref="PoHelpMessageServiceTarget" />
+	</bean>
+
+	<bean id="PoHelpMessageService"
+		class="org.springmodules.cache.interceptor.proxy.CacheProxyFactoryBean">
+		<property name="cacheKeyGenerator" ref="HashCodeKeyGenerator" />
+		<property name="cacheProviderFacade" ref="PoCacheProviderFacade" />
+		<property name="cachingModels">
+			<props>
+				<prop key="hasHelpMessage">cacheName=at.workflow.webdesk.po.HELPMESSAGECACHE
+				</prop>
+				<prop key="getHelpMessage">cacheName=at.workflow.webdesk.po.HELPMESSAGECACHE
+				</prop>
+			</props>
+		</property>
+		<property name="flushingModels">
+			<props>
+				<prop key="saveHelpMessage">cacheNames=at.workflow.webdesk.po.HELPMESSAGECACHE
+				</prop>
+			</props>
+		</property>
+		<property name="target" ref="CachedPoHelpMessageServiceTarget" />
+	</bean>
+
+	<!-- Transaction Management of the PoLicenceActionService -->
+	<bean id="PoLicenceActionService" parent="PoBaseTransactionProxy">
+		<property name="target" ref="PoLicenceActionServiceTarget" />
+	</bean>
+
+
+
+	<!-- Transaction Management of the PoMenuService -->
+	<bean id="CachedPoMenuServiceTarget" parent="PoBaseTransactionProxy">
+		<property name="target" ref="PoMenuServiceTarget" />
+	</bean>
+
+	<bean id="PoMenuService"
+		class="org.springmodules.cache.interceptor.proxy.CacheProxyFactoryBean">
+		<property name="cacheProviderFacade" ref="PoCacheProviderFacade" />
+		<property name="cacheKeyGenerator" ref="SimpleCacheKeyGenerator" />
+		<property name="cachingModels">
+			<props>
+				<prop key="getMenuTreeOfPerson">cacheName=at.workflow.webdesk.po.MENUCACHE</prop>
+			</props>
+		</property>
+		<property name="target" ref="CachedPoMenuServiceTarget" />
+	</bean>
+
+	<!-- Transaction Management of the PoMenuService -->
+	<bean id="CachedPoMenuTreeServiceTarget" parent="PoBaseTransactionProxy">
+		<property name="target" ref="PoMenuTreeServiceTarget" />
+	</bean>
+
+	<bean id="PoMenuTreeService"
+		class="org.springmodules.cache.interceptor.proxy.CacheProxyFactoryBean">
+		<property name="cacheProviderFacade" ref="PoCacheProviderFacade" />
+		<property name="cacheKeyGenerator" ref="SimpleCacheKeyGenerator" />
+		<property name="cachingModels">
+			<props>
+				<prop key="getMenuTreeOfPerson">cacheName=at.workflow.webdesk.po.MENUCACHE</prop>
+			</props>
+		</property>
+		<property name="target" ref="CachedPoMenuTreeServiceTarget" />
+	</bean>
+
+	<!-- Transaction Management of the PoJobService -->
+	<bean id="PoJobService" parent="PoBaseTransactionProxy">
+		<property name="target" ref="PoJobServiceTarget" />
+	</bean>
+
+	<!-- Transaction Management of the ModuleService -->
+	<bean id="CachedPoModuleServiceTarget" parent="PoBaseTransactionProxy">
+		<property name="target">
+			<ref bean="PoModuleServiceTarget" />
+		</property>
+	</bean>
+
+	<bean id="PoModuleService"
+		class="org.springmodules.cache.interceptor.proxy.CacheProxyFactoryBean">
+		<property name="cacheKeyGenerator" ref="HashCodeKeyGenerator" />
+		<property name="cacheProviderFacade" ref="PoCacheProviderFacade" />
+		<property name="cachingModels">
+			<props>
+				<prop key="getModuleByName">cacheName=at.workflow.webdesk.po.MODULECACHE</prop>
+			</props>
+		</property>
+		<property name="flushingModels">
+			<props>
+				<!-- we have to delete the textmodule cache also, if we change any modules, 
+					as we might detach it -->
+				<prop key="saveModule">cacheNames=at.workflow.webdesk.po.MODULECACHE,at.workflow.webdesk.po.TEXTMODULECACHE</prop>
+			</props>
+		</property>
+		<property name="target" ref="CachedPoModuleServiceTarget" />
+	</bean>
+
+
+	<bean id="CacheCommunicationListener"
+		class="at.workflow.webdesk.tools.cache.CacheCommunicationListener">
+		<property name="clusterConfig" ref="PoOptions" />
+	</bean>
+
+	<bean name="cacheCommunicationInterceptor"
+		class="at.workflow.webdesk.tools.cache.CacheCommunicationInterceptor">
+		<property name="communicationCache" ref="PoCommunicationCache" />
+		<property name="clusterConfig" ref="PoOptions" />
+	</bean>
+
+	<bean id="PoBeanPropertyService" parent="PoBaseTransactionProxy">
+		<property name="target" ref="PoBeanPropertyServiceTarget" />
+	</bean>
+
+	<bean name="PoBeanPropertyPointcutAdvisor"
+		class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
+		<property name="advice" ref="cacheCommunicationInterceptor" />
+		<property name="mappedName" value="injectAll" />
+	</bean>
+
+	<bean name="PoJobServicePointcutAdvisor"
+		class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
+		<property name="advice" ref="cacheCommunicationInterceptor" />
+		<property name="mappedNames" value="saveOrUpdateJob,saveOrUpdateJobTrigger" />
+	</bean>
+
+	<bean id="PoJobServiceProxyCreator"
+		class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<property name="beanNames">
+			<value>PoJobServiceTarget</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>PoJobServicePointcutAdvisor</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="PoBeanPropertyProxyCreator"
+		class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<property name="beanNames">
+			<value>PoBeanPropertyServiceTarget</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>PoBeanPropertyPointcutAdvisor</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="CachedPoKeyValueService" parent="PoBaseTransactionProxy">
+		<property name="target" ref="PoKeyValueServiceTarget" />
+	</bean>
+
+	<!-- Transaction Management of the ConnectorService -->
+	<bean id="PoConnectorService" parent="PoBaseTransactionProxy">
+		<property name="target" ref="PoConnectorTarget" />
+	</bean>
+
+	<!-- Transaction Management of the SystemMessageService -->
+	<bean id="PoSystemMessageService" parent="PoBaseTransactionProxy">
+		<property name="target" ref="PoSystemMessageTarget" />
+	</bean>
+
+	<!-- Transaction Management of the FileService -->
+	<bean id="CachedPoFileServiceTarget" parent="PoBaseTransactionProxy">
+		<property name="target" ref="PoFileServiceTarget" />
+	</bean>
+
+	<bean id="PoKeyValueService"
+		class="org.springmodules.cache.interceptor.proxy.CacheProxyFactoryBean">
+		<property name="cacheKeyGenerator" ref="HashCodeKeyGenerator" />
+		<property name="cacheProviderFacade" ref="PoCacheProviderFacade" />
+		<property name="cachingModels">
+			<props>
+				<prop key="findKeyValueType">cacheName=at.workflow.webdesk.po.KEYVALUETYPECACHE</prop>
+			</props>
+		</property>
+		<property name="flushingModels">
+			<props>
+				<prop key="save*">cacheNames=at.workflow.webdesk.po.KEYVALUETYPECACHE</prop>
+				<prop key="delete*">cacheNames=at.workflow.webdesk.po.KEYVALUETYPECACHE</prop>
+			</props>
+		</property>
+		<property name="target" ref="CachedPoKeyValueService" />
+	</bean>
+
+	<bean id="PoFileService"
+		class="org.springmodules.cache.interceptor.proxy.CacheProxyFactoryBean">
+		<property name="cacheKeyGenerator" ref="HashCodeKeyGenerator" />
+		<property name="cacheProviderFacade" ref="PoCacheProviderFacade" />
+		<property name="cachingModels">
+			<props>
+				<prop key="getFile*">cacheName=at.workflow.webdesk.po.CONFIGFILECACHE</prop>
+				<prop key="find*">cacheName=at.workflow.webdesk.po.CONFIGFILECACHE</prop>
+			</props>
+		</property>
+		<property name="flushingModels">
+			<props>
+				<prop key="generate*">cacheNames=at.workflow.webdesk.po.CONFIGFILECACHE</prop>
+				<prop key="save*">cacheNames=at.workflow.webdesk.po.CONFIGFILECACHE</prop>
+				<prop key="delete*">cacheNames=at.workflow.webdesk.po.CONFIGFILECACHE</prop>
+				<prop key="update*">cacheNames=at.workflow.webdesk.po.CONFIGFILECACHE</prop>
+			</props>
+		</property>
+		<property name="target" ref="CachedPoFileServiceTarget" />
+	</bean>
+
+
+	<!-- Transaction Definition object (parent Transaction) -->
+	<bean id="PoBaseTransactionProxy"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean"
+		abstract="true">
+		<property name="transactionManager">
+			<ref bean="TransactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="find*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="load*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="save*">PROPAGATION_REQUIRED</prop>
+				<prop key="save*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="change*">PROPAGATION_REQUIRED</prop>
+				<prop key="write*">PROPAGATION_REQUIRED</prop>
+				<prop key="clone*">PROPAGATION_REQUIRED</prop>
+				<prop key="create*">PROPAGATION_REQUIRED</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED</prop>
+				<prop key="fill*">PROPAGATION_REQUIRED</prop>
+				<prop key="sync*">PROPAGATION_REQUIRED</prop>
+				<prop key="inject*">PROPAGATION_REQUIRED</prop>
+				<prop key="init*">PROPAGATION_REQUIRED</prop>
+				<prop key="register*">PROPAGATION_REQUIRED</prop>
+				<prop key="refresh*">PROPAGATION_REQUIRED</prop>
+				<prop key="replace*">PROPAGATION_REQUIRED</prop>
+				<prop key="generate*">PROPAGATION_REQUIRED</prop>
+				<prop key="add*">PROPAGATION_REQUIRED</prop>
+				<prop key="edit*">PROPAGATION_REQUIRED</prop>
+				<prop key="link*">PROPAGATION_REQUIRED</prop>
+				<prop key="remove*">PROPAGATION_REQUIRED</prop>
+				<prop key="set*">PROPAGATION_REQUIRED</prop>
+				<prop key="assign*">PROPAGATION_REQUIRED</prop>
+				<prop key="copy*">PROPAGATION_REQUIRED</prop>
+				<prop key="schedule*">PROPAGATION_REQUIRED</prop>
+				<prop key="import*">PROPAGATION_REQUIRED</prop>
+				<prop key="reset*">PROPAGATION_REQUIRED</prop>
+				<prop key="isPasswordCorrect">PROPAGATION_REQUIRED</prop>
+				<prop key="clean*">PROPAGATION_REQUIRED</prop>
+				<!-- Exceptional getter save possibility -->
+				<prop key="getPrimaryTextModuleOfAction">PROPAGATION_REQUIRED</prop>
+				<prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- ****************************************** Logging and Debugging ****************************************** -->
+
+	<!-- Transaction Management of the PoLogService -->
+	<bean id="PoLogService"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="LogTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="PoLogServiceTarget" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<!-- ggruber 2013-04-22 isolation level was set from READ_UNCOMMITTED 
+					to READ_COMMITED as oracle does only supports READ_COMMITTED and SERIALIZABLE -->
+				<prop key="save*">PROPAGATION_REQUIRES_NEW,ISOLATION_READ_COMMITTED	</prop>
+				<prop key="delete*">PROPAGATION_REQUIRES_NEW,ISOLATION_READ_COMMITTED</prop>
+				<prop key="getLog">PROPAGATION_NEVER, readOnly</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- Log Bean DAO requires a Session Factory -->
+
+	<bean id="PoLogDAO" class="at.workflow.webdesk.po.impl.daos.PoLogDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="logSessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="PoLogServiceTarget" class="at.workflow.webdesk.po.impl.PoLogServiceImpl">
+		<property name="logDAO">
+			<ref bean="PoLogDAO" />
+		</property>
+		<property name="logAllActions">
+			<value>false</value>
+		</property>
+		<property name="logAllUsers">
+			<value>false</value>
+		</property>
+		<property name="actionsToLog">
+			<set>
+				<value>ta_getOrgAccounts</value>
+			</set>
+		</property>
+		<property name="usersToLog">
+			<set>
+				<value>wef</value>
+				<value>bos</value>
+			</set>
+		</property>
+	</bean>
+
+	<!-- The data source -->
+	<bean id="webdesk-log-DataSource" class="org.apache.tomcat.dbcp.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName">
+			<value>${hibernate.connection.driver_class}</value>
+		</property>
+		<property name="url">
+			<value>${hibernate.connection.url}</value>
+		</property>
+		<property name="username">
+			<value>${hibernate.connection.username}</value>
+		</property>
+		<property name="password">
+			<value>${hibernate.connection.password}</value>
+		</property>
+
+		<property name="maxIdle">
+			<value>80</value>
+		</property>
+		<property name="maxActive">
+			<value>-1</value>
+		</property>
+
+		<!-- enable removing of connections that have not been released by the 
+			application coders -->
+		<property name="removeAbandoned">
+			<value>true</value>
+		</property>
+		<property name="removeAbandonedTimeout">
+			<value>600</value>   <!-- seconds -->
+		</property>
+	</bean>
+
+
+	<!-- own hibernate session factory for logging -->
+	<bean id="logSessionFactory"
+		class="at.workflow.webdesk.tools.hibernate.ExtLocalSessionFactoryBean">
+		<property name="mappingPatternLocations">
+			<list>
+				<value>classpath*:/at/workflow/webdesk/po/model/PoLog*.hbm.xml
+				</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+
+				<!-- show SQLs nicely! -->
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.format_sql">true</prop>
+			</props>
+		</property>
+		<property name="dataSource" ref="webdesk-log-DataSource" />
+	</bean>
+
+	<bean id="LogTransactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref bean="logSessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="GeneralLogInterceptorProxyCreator4Services"
+		class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<property name="beanNames" value="*Service" />
+		<property name="interceptorNames">
+			<list>
+				<value>performanceLogInterceptor</value>
+				<value>traceLogInterceptor</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="GeneralLogInterceptorProxyCreator4ActionHandlers"
+		class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<property name="beanNames" value="*ActionHandler" />
+		<property name="interceptorNames">
+			<list>
+				<value>performanceLogInterceptor</value>
+				<value>traceLogInterceptor</value>
+			</list>
+		</property>
+		<!-- this is important for flowscript accessing the actionhandlers -->
+		<property name="proxyTargetClass" value="true" />
+	</bean>
+
+	<bean id="performanceLogInterceptor"
+		class="at.workflow.webdesk.tools.interceptors.TresholdPerformanceMonitorInterceptor">
+		<property name="loggerName">
+			<value>at.workflow.webdesk.performanceLogger</value>
+		</property>
+		<property name="treshold" value="50" />
+	</bean>
+
+	<bean id="traceLogInterceptor"
+		class="org.springframework.aop.interceptor.CustomizableTraceInterceptor">
+		<property name="loggerName">
+			<value>at.workflow.webdesk.traceLogger</value>
+		</property>
+	</bean>
+
+	<bean id="PoStartup" class="at.workflow.webdesk.po.impl.PoStartupImpl">
+		<property name="registrationService" ref="PoRegistrationService" />
+		<property name="moduleUpdateService" ref="PoModuleUpdateService" />
+		<property name="beanPropertyService" ref="PoBeanPropertyService" />
+		<property name="beanPropertyCollector" ref="PoBeanPropertyCollector" />
+		<property name="languageService" ref="PoLanguageService" />
+		<property name="actionService" ref="PoActionService" />
+		<property name="settings" ref="org.apache.cocoon.configuration.Settings" />
+		<property name="dataSourceService" ref="PoDataSourceService" />
+		<property name="mySqlCharsetChecker" ref="MySqlCharsetChecker" />
+		<property name="searchIndexService" ref="PoSearchService" />
+	</bean>
+
+	<bean id="PoScriptingService" class="at.workflow.webdesk.po.impl.PoScriptingServiceImpl" />
+
+	<bean id="FilterService" class="at.workflow.webdesk.po.impl.FilterServiceImpl" />
+
+
+	<bean name="PoBeanPropertyCollector" class="at.workflow.webdesk.po.impl.PoBeanPropertyCollector">
+		<property name="beanNameSeparator" value="/" />
+		<!-- this is important to specify that spring configurators PropertyOverrideConfigurer 
+			will start BEFORE this collection is taken. we obviously want to get the 
+			values gathered by spring configurator (property files ...) also! however 
+			the order value is actually the SAME as in the spring-configurator extension, 
+			but it is not possible to set it there :-( still luckily it seems to work. 
+			@TODO try to convince cocoon people to make this configurable -->
+		<property name="order" value="2147483647" />
+	</bean>
+
+	<bean id="PoPasswordService" parent="PoBaseTransactionProxy">
+		<property name="target" ref="PoPasswordServiceTarget" />
+	</bean>
+
+	<bean id="PoPasswordServiceTarget" class="at.workflow.webdesk.po.impl.PoPasswordServiceImpl">
+		<property name="passwordQuality" ref="PoPasswordQuality" />
+		<property name="resetMail" ref="PoPasswordResetMail" />
+		<property name="resetPolicy" ref="PoPasswordResetPolicy" />
+		<property name="passwordDAO" ref="PoPasswordDAO" />
+		<property name="mailService" ref="PoMailService" />
+		<property name="scriptingService" ref="PoScriptingService" />
+	</bean>
+
+	<bean id="PoImageService" parent="PoBaseTransactionProxy">
+		<property name="target" ref="PoImageServiceTarget" />
+	</bean>
+
+	<bean id="PoImageServiceTarget" class="at.workflow.webdesk.po.impl.PoImageServiceImpl">
+		<property name="imageDAO" ref="PoImageDAO" />
+		<property name="dbService" ref="PoGeneralDbService" />
+	</bean>
+
+	<bean id="PoProcessParameterAccessor"
+		class="at.workflow.webdesk.po.impl.helper.PoProcessParameterAccessorImpl"
+		scope="singleton" />
+
+	<bean id="ProcessReferenceDetachHandlerImpl"
+		class="at.workflow.webdesk.po.ProcessReferenceDetachHandler$ProcessReferenceDetachHandlerImpl"
+		scope="singleton">
+		<property name="actionService" ref="PoActionService" />
+	</bean>
+	<bean id="PoMultiClientService" class="at.workflow.webdesk.po.impl.PoMultiClientServiceImpl"
+		scope="singleton">
+		<property name="orgService" ref="PoOrganisationService" />
+		<property name="clientDao" ref="PoClientDAO" />
+	</bean>
+
+	<bean id="PoPersonImageDimensions" class="at.workflow.webdesk.po.model.PoImageDimensions"
+		scope="singleton">
+		<property name="applicableTo" value="at.workflow.webdesk.po.model.PoPersonImages" />
+		<property name="originalMaxWidth" value="750" />
+		<property name="originalMaxHeight" value="750" />
+		<property name="targetWidth" value="150" />
+		<property name="targetHeight" value="150" />
+		<property name="thumbnailWidth" value="55" />
+		<property name="thumbnailHeight" value="55" />
+	</bean>
+
+	<bean id="HistorizationCleanerAndMerger"
+		class="at.workflow.webdesk.po.timeline.HistorizationCleanerAndMerger"
+		scope="singleton">
+		<property name="helper" ref="HistorizationTimelineHelper" />
+	</bean>
+
+	<bean id="PoSearchServiceTarget" class="at.workflow.webdesk.po.impl.PoSearchServiceImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+		<property name="persistenceMetadata" ref="PersistenceMetadata" />
+	</bean>
+	
+	<bean id="PoSearchService" parent="PoBaseTransactionProxy">
+		<property name="target" ref="PoSearchServiceTarget" />
+	</bean>
+</beans>

@@ -1,0 +1,7 @@
+<connector>
+    <name>DummyDestinationConnector</name>   
+    <className>at.workflow.webdesk.po.impl.connector.dummyDestination.PoDummyDestinationConnector</className>
+    <configurable>true</configurable>
+    <updateOnVersionChange>true</updateOnVersionChange>
+    <writeable>true</writeable>
+</connector>

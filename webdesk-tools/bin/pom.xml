@@ -1,0 +1,377 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>at.workflow.webdesk</groupId>
+	<artifactId>webdesk-tools</artifactId>
+	<version>1.7.0-SNAPSHOT</version>
+
+	<name>Webdesk Tools</name>
+
+	<parent>
+		<groupId>at.workflow.webdesk</groupId>
+		<artifactId>webdesk-parent</artifactId>
+		<version>26-SNAPSHOT</version>
+		<relativePath>../../parent/pom.xml</relativePath>
+	</parent>
+
+	<scm>
+		<connection>scm:svn:https://extranet.workflow.at/svn/wfrepos/webdesk/trunk/core/webdesk-tools</connection>
+	</scm>
+	
+    
+	<reporting>
+	   <plugins>
+	     <plugin>
+	       <groupId>org.codehaus.mojo</groupId>
+	       <artifactId>scmchangelog-maven-plugin</artifactId>
+	       <version>1.3</version>
+            <configuration>
+		         <grammar>ALL</grammar>
+		         <filter>.*</filter>
+            </configuration>
+	     </plugin>
+	      <plugin>
+	        <groupId>org.apache.maven.plugins</groupId>
+	        <artifactId>maven-changelog-plugin</artifactId>
+	        <version>2.2</version>
+	      </plugin>
+	   </plugins>
+	
+	</reporting>
+
+	<dependencies>
+		<dependency>
+			<groupId>at.workflow.webdesk</groupId>
+			<artifactId>webdesk-base-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>at.workflow</groupId>
+			<artifactId>wf-tools</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>at.workflow.webdesk</groupId>
+			<artifactId>webdesk-keystore</artifactId>
+		</dependency>
+        
+		
+		<dependency>
+			<groupId>org.apache.ant</groupId>
+			<artifactId>ant</artifactId>
+			<version>1.7.0</version>
+		</dependency>
+		<dependency>
+		    <groupId>bouncycastle</groupId>
+		    <artifactId>bcprov-jdk14</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>3.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-configuration</groupId>
+			<artifactId>commons-configuration</artifactId>
+			<version>1.6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.cocoon</groupId>
+			<artifactId>cocoon-spring-configurator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+		</dependency>		
+		<dependency>
+			<groupId>jaxen</groupId>
+			<artifactId>jaxen</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>jdom</groupId>
+			<artifactId>jdom</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<!--  this is important that junit is in the complete
+		scope in order for dependent projects to inherit from the
+		abstract testcases! -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+ 			<version>${junit-version}</version>
+ 			<scope>compile</scope>
+		</dependency>		
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>xalan</groupId>
+			<artifactId>xalan</artifactId>
+			<version>2.7.0</version>
+		</dependency>
+		<dependency>
+			<groupId>xerces</groupId>
+			<artifactId>xercesImpl</artifactId>
+			<version>2.8.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+		</dependency>
+		
+		<dependency>
+             <groupId>org.apache.tomcat</groupId>
+             
+            <!--
+                We use tomcat-dbcp instead of old dbcp because this is recommended
+                for avoiding problems with removing abandoned objects.
+             -->
+             <!-- The Java 1.6 Version -->
+             <artifactId>tomcat-dbcp</artifactId>
+             <version>7.0.37</version>
+             
+             <!-- The Java 1.5 version
+             <artifactId>dbcp</artifactId>  
+             <version>6.0.32</version> -->
+        </dependency>
+		<dependency>
+            <!--
+                fri_2011-06-15: we can not drop the old "commons" JDBC pool because
+                old Webdesk-Jobs use the API (they compile at runtime).
+            --> 
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.3</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>rhino</groupId>
+			<artifactId>js</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.axis</groupId>
+			<artifactId>axis</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.axis</groupId>
+			<artifactId>axis-jaxrpc</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.axis</groupId>
+			<artifactId>axis-saaj</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<!--
+			+ | + Spring + | +
+		-->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.ws</groupId>
+			<artifactId>spring-ws-support</artifactId>
+			<version>1.5.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.scriptgenerated</groupId>
+			<artifactId>spring-modules</artifactId>
+			<version>0.9-all</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>2.5.5</version>
+		</dependency>
+		<dependency>
+			<groupId>aopalliance</groupId>
+			<artifactId>aopalliance</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>2.1_3</version>
+		</dependency>
+		
+		<!--
+			+ | + Hibernate + | +
+		-->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<!-- artifactId>hibernate</artifactId -->
+			
+            <exclusions>
+                <exclusion>
+                    <groupId>net.sf.ehcache</groupId>
+                    <artifactId>ehcache</artifactId>
+                </exclusion>
+            </exclusions>
+  		</dependency>
+		
+		
+		<!--
+			+ | + JDBC drivers + | +
+		-->
+    
+    <!-- Microsoft MS SQL -->
+    
+        <!-- Following is the Microsoft JDBC driver for Java 1.6, see
+            http://www.microsoft.com/downloads/de-de/details.aspx?FamilyID=a737000d-68d0-4531-b65d-da0f2a735707
+            fri_2011-03-29 
+        -->
+        <dependency>
+          <groupId>com.microsoft.sqlserver.jdbc</groupId>
+          <artifactId>sqljdbc4</artifactId>
+          <version>3.0</version>
+        </dependency>
+        
+        <!-- Following is the Microsoft JDBC driver for Java 1.5
+            fri_2011-03-29 
+        <dependency>
+          <groupId>com.microsoft.sqlserver.jdbc</groupId>
+          <artifactId>sqljdbc</artifactId>
+          <version>2.0</version>
+        </dependency>
+        -->
+        
+        <!-- JTDS Open Source Microsoft driver
+            fri_2011-03-29 commented this out, as no one seems to use this. MS-SQL driver is microsoft, see above
+        <dependency>
+            <groupId>net.sourceforge.jtds</groupId>
+            <artifactId>jtds</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+        -->
+        
+        
+    <!-- MySQL -->
+		<dependency>
+		    <groupId>mysql</groupId>
+		    <artifactId>mysql-connector-java</artifactId>
+		    <version>5.1.21</version>
+		</dependency>
+		
+		
+    <!-- hsqldb -->
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+
+
+    <!-- Oracle -->
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc6</artifactId>
+            <version>11.2.0.3</version>
+        </dependency>
+		
+		
+    <!-- DB2 (not yet supported) -->
+        <dependency>
+            <groupId>org.scriptgenerated</groupId>
+            <artifactId>db2java</artifactId>
+            <version>1.0.0-gen</version>
+        </dependency>
+        <dependency>
+            <groupId>org.scriptgenerated</groupId>
+            <artifactId>db2jcc</artifactId>
+            <version>1.0.0-gen</version>
+        </dependency>
+        
+
+
+		
+		<!--
+		the content of this jar is contained  in org.springframework/spring-orm so we use spring-orm instead
+		<dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-hibernate3</artifactId>
+            <version>2.0.8</version>
+        </dependency>
+		 -->
+
+		<!--  
+		  needed for jpa 
+		-->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+		</dependency>
+		
+		<!--  spring transactions and DAO support classes -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-entitymanager</artifactId>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-search</artifactId>
+		    <exclusions>
+		        <exclusion>
+		            <artifactId>hsqldb</artifactId>
+		            <groupId>hsqldb</groupId>		            
+		        </exclusion>		        
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+		    <groupId>net.sourceforge.schemacrawler</groupId>
+		    <artifactId>schemacrawler</artifactId>
+		    <version>9.1</version>
+        </dependency>
+            
+	</dependencies>
+</project>

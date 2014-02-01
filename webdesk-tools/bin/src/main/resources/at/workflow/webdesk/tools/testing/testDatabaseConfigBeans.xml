@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:util="http://www.springframework.org/schema/util"
+        xmlns:configurator="http://cocoon.apache.org/schema/configurator"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd
+            http://cocoon.apache.org/schema/configurator http://cocoon.apache.org/schema/configurator/cocoon-configurator-1.0.1.xsd">
+
+    <!-- The data source -->
+    <bean id="webdesk-DataSource" class="org.apache.tomcat.dbcp.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName">
+            <value>${hibernate.connection.driver_class}</value>
+        </property>
+        <property name="url">
+            <value>${hibernate.connection.url}</value>
+        </property>
+        <property name="username">
+            <value>${hibernate.connection.username}</value>
+        </property>
+        <property name="password">
+            <value>${hibernate.connection.password}</value>
+        </property>
+        <property name="maxIdle">
+            <value>80</value>
+        </property>
+        <property name="maxActive">
+            <value>-1</value>
+        </property>
+        <property name="removeAbandoned">
+            <value>true</value>
+        </property>
+        <property name="removeAbandonedTimeout">  <!-- in seconds -->
+            <value>1800</value>
+        </property>
+    </bean>
+    
+    <bean id="lobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler"> </bean>
+    
+    <bean id="webdesk-SessionFactory" name="sessionFactory" class="at.workflow.webdesk.tools.hibernate.ExtLocalSessionFactoryBean">
+        <property name="mappingPatternLocations">
+            <ref bean="hibernateMappingPatternLocations"/>
+        </property>
+        
+        <property name="annotatedClassesBeanMap">
+            <configurator:bean-map type="at.workflow.webdesk.tools.hibernate.HibernateAnnotationsRegistration" />
+        </property>
+        
+        <property name="eventListeners">
+            <map>
+                <entry key="post-update">
+                    <bean class="org.hibernate.search.event.FullTextIndexEventListener"/>
+                </entry>
+                <entry key="post-insert">
+                    <bean class="org.hibernate.search.event.FullTextIndexEventListener"/>
+                </entry>
+                <entry key="post-delete">
+                    <bean class="org.hibernate.search.event.FullTextIndexEventListener"/>
+                </entry>
+            </map>
+        </property>
+        
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+                <!-- prop key="hibernate.default_schema">webdesk</prop-->
+                
+                <!-- Database Property -->
+                <prop key="hibernate.connection.poolSize">0</prop>
+                
+                <!-- show SQLs nicely! -->
+                <prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.jdbc.batch_size">0</prop>
+                
+                <!--
+                    DO NOT include this in a production environment!
+                    makes problem with HSQLDB
+                    <prop key="hibernate.default_schema"></prop>
+                -->
+                
+                <prop key="hibernate.cache.provider_class">at.workflow.webdesk.tools.hibernate.CustomCacheProvider</prop>
+            </props>
+        </property>
+        <property name="dataSource">
+            <ref bean="webdesk-DataSource"/>
+        </property>
+        <property name="schemaUpdate">
+            <value>true</value>
+        </property>
+        <property name="lobHandler">
+            <ref bean="lobHandler"/>
+        </property>
+        
+        
+    </bean>
+    
+    <!--  
+        The created cache manager is an instance of net.sf.ehcache.CacheManager
+    -->
+    <bean id="CacheManager" 
+        class="at.workflow.webdesk.tools.cache.CustomEhCacheManagerFactoryBean"/>
+    
+    <bean id="CacheSystemProperties" class="at.workflow.webdesk.tools.config.StartupSystemPropertiesWriter">
+        <constructor-arg>
+            <map>
+                <entry key="net.sf.ehcache.enableShutdownHook" value="true"/>
+            </map>
+        </constructor-arg>
+    </bean>
+    
+    <bean id="SimpleCacheKeyGenerator" class="at.workflow.webdesk.tools.cache.SimpleCacheKeyGenerator"/>
+    
+    <bean id="HashCodeKeyGenerator" class="at.workflow.webdesk.tools.cache.HashCodeCacheKeyGeneratorWrapper">
+        <property name="cacheHibernateUtils">
+            <ref bean="PoCacheHibernateUtils"/>
+        </property>
+    </bean>
+    
+    <bean id="PoCacheHibernateUtils" class="at.workflow.webdesk.tools.cache.CacheHibernateUtils">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory"/>
+        </property>
+    </bean>
+    
+    
+    <!-- Transaction manager for a single Hibernate SessionFactory (alternative to JTA) -->
+    <bean id="TransactionManager" name="transactionManager"
+        class="org.springframework.orm.hibernate3.HibernateTransactionManager" autowire-candidate="true">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory"/>
+        </property>
+    </bean>
+    
+    <bean id="DaoJdbcUtil" class="at.workflow.webdesk.tools.DaoJdbcUtil">
+        <property name="dialect">
+            <value>${hibernate.dialect}</value>
+        </property>
+        
+        <property name="dataSource">
+            <ref bean="webdesk-DataSource"/>
+        </property>
+        <property name="webdeskDataSource">
+            <ref bean="webdesk-DataSource"/>
+        </property>
+    </bean>
+    
+    <bean name="hibernateInterceptor"
+        class="org.springframework.orm.hibernate3.HibernateInterceptor">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory"/>
+        </property>
+        <property name="flushMode">
+            <value>0</value>
+        </property>
+        
+    </bean>
+    
+    <bean id="PropertiesUtils" class="at.workflow.webdesk.tools.config.PropertiesUtils"/>
+    
+    <bean id="SysAdminUserInfo" class="at.workflow.webdesk.tools.testing.SysAdminUserInfoMock"/>
+    
+    <bean id="org.apache.cocoon.configuration.Settings" class="org.apache.cocoon.configuration.MutableSettings">
+        <constructor-arg>
+            <value>dev</value>
+        </constructor-arg>
+    </bean>
+    
+    <!-- fri_2012-02-24 this was copied from po-frontend-services.xml to here -->
+    <bean id="PersistenceMetadata" class="at.workflow.webdesk.tools.dbmetadata.PersistenceMetadataHibernate" scope="prototype"/>
+    
+    <!--  ggruber 2012-03-27 copied from servicesConfig.xml to here -->
+    <bean name="XPathTools" class="at.workflow.tools.XPathTools" scope="singleton" />
+
+    
+    <!--  definitions for JPA -->
+    
+    <!-- 
+    <bean id="persistenceUnitPostProcessor" class="at.workflow.webdesk.tools.testing.HibernatePersistenceUnitPostProcessor">
+        <property name="mappingPatternLocations">
+            <ref bean="hibernateMappingPatternLocations"/>
+        </property>
+        <property name="annotatedClassesBeanMap">
+            <configurator:bean-map type="at.workflow.webdesk.tools.hibernate.HibernateAnnotationsRegistration" />
+        </property>    
+    </bean>
+    
+    <bean id="persistenceUnitManager" class="org.springframework.orm.jpa.persistenceunit.DefaultPersistenceUnitManager">
+        <property name="persistenceUnitPostProcessors" ref="persistenceUnitPostProcessor"/>
+        <property name="persistenceXmlLocation" value="classpath*:/at/workflow/webdesk/tools/testing/testJpaPersistence.xml"/>
+    </bean>
+    
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="persistenceUnitManager" ref="persistenceUnitManager"/>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="showSql" value="true" />
+                <property name="generateDdl" value="true" />
+                <property name="databasePlatform" value="${hibernate.dialect}" />
+            </bean>
+        </property>
+    </bean>
+     -->
+    
+</beans>

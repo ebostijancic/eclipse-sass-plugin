@@ -1,0 +1,8 @@
+<job>
+    <name>Test Job2</name>
+    <description>Testjob for Unit Test</description>
+    <jobClass>at.workflow.webdesk.po.jobs.testJob2.TestJobMultipleRuns</jobClass>
+    <isConfigurable>false</isConfigurable>
+    <active>false</active>
+    <updateOnVersionChange>true</updateOnVersionChange>
+</job>

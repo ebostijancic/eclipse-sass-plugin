@@ -1,0 +1,35 @@
+<keys>
+    <!--  help infos for bean properties 
+
+        TODO:
+            
+        <bean id="WfOptions" class="at.workflow.webdesk.wf.model.WfOptions">
+        <property name="showGraphicalProcessRepresentation" value="false"/>
+        <property name="showFormDetailsFirst" value="false"/>
+        <property name="showProcessVariables" value="true"/>
+        <property name="showOrgUnitWithinWorkList" value="false"/>
+        <property name="showRoleInsteadNextPerformer" value="false"/>
+        <property name="showEmployeeIdWithinWorkList" value="false"/>
+        <property name="alwaysHideActionLogs" value="false"/>
+        <property name="hideSubProcesses" value="true"/>
+        <property name="useWfListBatchModeOnly" value="false"/>
+        
+     SAMPLE:
+     
+    <key value="po_editBeanProperties.act_WfOptions_showConfirmationDialogInWfListOnRedirectAndDelete">
+        <en>Show confirmation dialog before proceeding, when a 'delete and redirect' action is displayed inside the worklist</en>
+        <de>Einholung einer User-Bestätigung bevor der Systemhinweis gelöscht wird?</de>
+    </key>
+    -->
+    
+    <!--  this file is used for help messages for bean properties within PO -->
+    <key value="po_editBeanProperties.act_PoMenuServiceTarget_extractPermissionBeforeHand">
+        <en>Boolean value (true/false) to specify whether action permissions ()including the evaluation of the correct config) of a user should be evaluated in a thread upon menu creation.</en>
+        <de>Boolscher Wert (true/false) welcher angibt, ob Aktionsberechtigungen und etwaige Weiterleitungen auf Configs innerhalb eines nebenläufigen Threads beim Menüaufbau evaluiert werden sollen.</de>
+    </key>
+    <key value="po_editBeanProperties.act_PoMenuServiceTarget_mergeMenuFoldersWithSameName">
+        <en>Boolean value (true/false) to specify whether folder structure (until level 2) inside a usermenu should be merged.</en>
+        <de>Boolscher Wert (true/false) welcher angibt, ob gleichnamige Ordner-Strukturen (bis zur Tiefe 2) in einem User-Menü "zusammengemischt" werden sollen.</de>
+    </key>
+    
+</keys>

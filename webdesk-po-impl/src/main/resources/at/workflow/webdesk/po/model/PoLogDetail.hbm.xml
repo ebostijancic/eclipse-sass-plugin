@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class table="PoLogDetail" name="at.workflow.webdesk.po.model.PoLogDetail">
+    <id name="UID" type="string" column="LOGDETAIL_UID" length="32">
+      <generator class="uuid.hex" />
+    </id>
+    <property name="logger" length="80" />
+    <property name="logLevel" length="10" />
+    <property name="message" length="2000" />
+    <property name="timeStamp" type="timestamp">
+        <column name="logTimeStamp" index="IDX_PoLogDetail_timestamp"/>
+    </property>
+    <many-to-one column="LOG_UID" cascade="none" foreign-key="FK_LOGDETAIL_LOG" not-null="false" name="log" />
+    <set inverse="true" cascade="delete-orphan" order-by="pos asc" lazy="true" name="logDetailThrowables">
+      <key column="LOGDETAIL_UID" />
+      <one-to-many class="at.workflow.webdesk.po.model.PoLogDetailThrowable" />
+    </set>
+  </class>
+</hibernate-mapping>

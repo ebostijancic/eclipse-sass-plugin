@@ -1,0 +1,6 @@
+<upgrade>
+  
+    <sql dataSource="webdesk" failOnError="false">update PoJob set linkToLogs=0</sql>
+    <sql dataSource="webdesk" failOnError="false">update PoJob set mailForwardingEnabled=0</sql>
+    
+</upgrade>

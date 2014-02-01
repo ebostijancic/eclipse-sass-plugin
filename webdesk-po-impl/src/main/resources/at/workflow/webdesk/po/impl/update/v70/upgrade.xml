@@ -1,0 +1,5 @@
+<upgrade>
+    <sql dataSource="webdesk" failOnError="true" applies="*" excludes="mysql">UPDATE PoAction SET alwaysOpenInNewWindow = 0 WHERE alwaysOpenInNewWindow IS NULL</sql>
+    <sql dataSource="webdesk" failOnError="true" applies="mysql">update PoAction set alwaysOpenInNewWindow = false where alwaysOpenInNewWindow is null</sql>
+</upgrade>
+

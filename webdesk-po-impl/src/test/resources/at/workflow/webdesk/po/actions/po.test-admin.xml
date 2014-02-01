@@ -1,0 +1,49 @@
+<!-- TEST Admin Menu Tree of the PO Package -->  
+
+<menu>
+    <folder text="po_masterdata">
+        <action id="po_showClients.act"/>
+        <action id="po_showOrgStructures.act"/>  	
+        <action id="po_showRoles.act"/>  	
+        <action id="po_showGroups.act"/>  	
+        <action id="po_showPersons.act"/>  	
+        <action id="po_orgBuilder.act"/>  	
+    </folder>
+    
+    <folder text="po_menu_and_actions">
+        <action id="po_editMenuTree.act" />
+        <action id="po_showActions.act"/>
+    </folder>
+    
+    <folder text="po_modules"/>
+    
+    <folder text="po_settings">
+        <action id="po_showKeyValueTypes.act"/>
+        <action id="po_showSystemMessages.act"/>
+        <action id="po_editLogSettings.act"/>
+        <action id="po_editBeanProperties.act"/>
+    </folder>
+    
+    <folder text="po_system">
+        <action id="po_refreshSettings.act"/>
+        <action id="po_showJobs.act"/>
+        <action id="po_showConnectors.act"/>
+        <action id="po_showConnectorLinks.act"/>
+        <action id="po_showModules.act"/>
+        <action id="po_editLanguages.act"/>
+        <action id="po_showTextModules.act"/>
+        <action id="po_showFiles.act"/>
+        <action id="po_showLicence.act"/>
+    </folder>
+    
+    <folder text="po_monitoring">
+        <action id="po_showLogs.act"/>
+        <action id="po_showCaches.act"/>
+        <action id="po_showActiveUsers.act"/>
+        <action id="po_showActiveJobs.act"/>
+        <action id="po_manageContinuations.act"/>
+        <action id="po_showStatusReport.act"/>
+        <action id="po_switchToOtherUser.act"/>
+        
+    </folder>
+</menu>

@@ -1,0 +1,6 @@
+<upgrade>
+	<!--  remove empty textmodules! -->
+    <sql dataSource="webdesk">
+    	delete from PoTextModule where (name is null or name='' or name=' ') and TEXTMODULE_PARENT_UID is null
+    </sql>
+</upgrade>

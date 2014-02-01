@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class lazy="true" table="PoActionParameter" name="at.workflow.webdesk.po.model.PoActionParameter">
+    <cache usage="read-write" />
+    <id name="UID" type="string" column="ACTIONPARAMETER_UID" length="32">
+      <generator class="uuid.hex" />
+    </id>
+    <many-to-one column="ACTION_UID" cascade="none" foreign-key="FK_ACTIONPARAMETER_ACTION" 
+        lazy="false" not-null="true" name="action" />
+    <property name="name" not-null="true" />
+    <property name="type" column="parameterType" not-null="true" />
+    <property name="pattern" />
+    <property name="comment" column="theComment" />
+  </class>
+</hibernate-mapping>

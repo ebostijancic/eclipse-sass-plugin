@@ -1,0 +1,5 @@
+<upgrade>
+	<!-- entfernen von Feldern, die durch ein gemeinsames Feld "pricingUntil" ersetzt werden -->
+	<sql dataSource="webdesk" failOnError="false">update PoKeyValue set ranking=0</sql>
+	
+</upgrade>

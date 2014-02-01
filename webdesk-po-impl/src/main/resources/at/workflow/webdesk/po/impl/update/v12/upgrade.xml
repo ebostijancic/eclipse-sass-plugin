@@ -1,0 +1,8 @@
+<upgrade>
+    <!-- deletes indizes of unique keys
+    which are checked by the DAO in the timeline now! -->
+    <sql dataSource="webdesk" failOnError="false">alter table poaction drop index Name</sql>
+    <sql dataSource="webdesk" failOnError="false">alter table poaction drop index name_and_type_unique</sql>
+</upgrade>
+
+

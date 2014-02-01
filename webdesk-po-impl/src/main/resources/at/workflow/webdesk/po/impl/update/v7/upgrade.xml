@@ -1,0 +1,3 @@
+<upgrade>
+    <sql dataSource="webdesk">update PoRole set directionOfInheritance=1 where directionOfInheritance is null</sql>
+</upgrade>

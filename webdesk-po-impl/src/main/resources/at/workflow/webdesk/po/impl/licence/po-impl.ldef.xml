@@ -1,0 +1,56 @@
+<!-- Will be encrypted -->
+<!-- 
+    Licences for the Po Base Module
+
+    Some explainations:
+    * The Name of the licence definition has to be unique
+    * There is a relation between the module and the actionfolder in the action descriptor
+    * context: All application contexts in this directory will be included,  
+        If there is no licence, all application contexts will be excluded
+-->
+<licence-defs>
+
+    <licence>
+        <name>employee</name>
+        <module>po</module>
+        <contexts>
+            <context>at/workflow/webdesk/po/impl/spring</context>
+            <context>at/workflow/webdesk/po/webclient/spring</context>
+        </contexts>
+        <actions>
+            <!-- define actions to include here -->
+        </actions>
+        <!--  this licence does not give the right to assign actions to the persons -->
+        <isNegativeList>false</isNegativeList>
+        
+        <!-- define the volume-licence check -->
+        <sql>select count(*) from PoPerson where validto>current_timestamp()</sql>
+        <sqlIsInvolved>savePerson,updatePerson</sqlIsInvolved>
+        <dialect>hql</dialect>
+        <whichDb>webdesk</whichDb>
+        <checkType>1</checkType>
+    </licence>
+
+   
+    <licence>
+        <name>basic</name>
+        <extends>employee</extends>
+        <module>po</module>
+        <contexts>
+            <context>at/workflow/webdesk/po/impl/spring</context>
+            <context>at/workflow/webdesk/po/webclient/spring</context>
+        </contexts>
+        <actions>
+            <!-- define actions to exclude here -->
+        </actions>
+        <isNegativeList>true</isNegativeList>
+        
+        <!-- define the volume-licence check -->
+        <sql>select count(*) from PoPerson where validto>current_timestamp() and activeUser is true</sql>
+        <sqlIsInvolved>savePerson,updatePerson</sqlIsInvolved>
+        <dialect>hql</dialect>
+        <whichDb>webdesk</whichDb>
+        <checkType>1</checkType>
+    </licence>
+    
+</licence-defs>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class table="PoConnector" name="at.workflow.webdesk.po.model.PoConnector">
+    <id name="UID" type="string" column="CONNECTOR_UID" length="32">
+      <generator class="uuid.hex" />
+    </id>
+    <set inverse="true" cascade="all-delete-orphan" lazy="true" name="configFiles">
+      <key column="CONNECTOR_UID" />
+      <one-to-many class="at.workflow.webdesk.po.model.PoFile" />
+    </set>
+    <many-to-one column="CONNECTOR_PARENT_UID" cascade="none" foreign-key="FK_CONNECTOR_CONNECTOR_PARENT" lazy="false" not-null="false" name="parent" />
+    <set inverse="true" lazy="true" name="childs">
+      <key not-null="false" column="CONNECTOR_PARENT_UID" />
+      <one-to-many class="at.workflow.webdesk.po.model.PoConnector" />
+    </set>
+    <property name="className" not-null="false" />
+    <property name="configurable" />
+    <property name="name" not-null="true">
+      <column name="NAME" unique-key="nameAndModule" />
+    </property>
+    <property name="updateOnVersionChange" />
+    <many-to-one cascade="none" foreign-key="FK_CONNECTOR_MODULE" lazy="false" not-null="false" name="module">
+      <column name="MODULE_UID" unique-key="nameAndModule" />
+    </many-to-one>
+    <set inverse="true" cascade="all-delete-orphan" lazy="true" name="srcConnectorLinks">
+      <key column="SRCCONNECTOR_UID" />
+      <one-to-many class="at.workflow.webdesk.po.model.PoConnectorLink" />
+    </set>
+    <set inverse="true" cascade="all-delete-orphan" lazy="true" name="destConnectorLinks">
+      <key column="DESTCONNECTOR_UID" />
+      <one-to-many class="at.workflow.webdesk.po.model.PoConnectorLink" />
+    </set>
+    <property name="flowDirection">
+      <type name="org.hibernate.type.EnumType">
+          <param name="enumClass">at.workflow.webdesk.po.model.FlowDirection</param>
+      </type>
+    </property>
+    <property name="writeable" />
+  </class>
+</hibernate-mapping>

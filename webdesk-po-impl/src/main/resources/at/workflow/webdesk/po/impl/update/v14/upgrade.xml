@@ -1,0 +1,7 @@
+<upgrade>
+    <!-- sets boolean flag to false, to avoid problems
+    with null values -->
+    <sql dataSource="webdesk" failOnError="false">update poconnectorlink set syncdeletions=0 where syncdeletions is null</sql>
+</upgrade>
+
+

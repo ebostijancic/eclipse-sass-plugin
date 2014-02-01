@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" ng-app="SttSignup">
+<head>
+<meta charset="utf-8"></meta>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"></meta>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+<link rel="stylesheet" type="text/css" media="screen"
+	th:href="@{/assets/css/bootstrap.css}"></link>
+<link rel="stylesheet" type="text/css" media="screen"
+	th:href="@{/assets/css/bootstrap-theme.css}"></link>
+<link rel="stylesheet" type="text/css" media="screen"
+	th:href="@{/assets/css/login/style.css}"></link>
+
+<script th:src="@{/assets/js/jquery-1.10.2.js}"></script>
+<script th:src="@{/assets/js/angular.js}"></script>
+<script th:src="@{/assets/js/bootstrap.js}"></script>
+<script th:src="@{/assets/js/signup/action.js}"></script>
+
+</head>
+<body>
+	<div class="container">
+		<div class="login-container">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h2>Signup</h2>
+				</div>
+				<form th:action="@{/signup}" method="post" class="form-signin" role="form"
+					ng-controller="SignupController">
+					<div class="panel-body">
+						<input class="form-control username-control" type="text"
+							name="username" placeholder="username" required="true"
+							autofocus="true" ng-model="{{username}}" />
+						<input
+							class="form-control password-control" type="password"
+							name="password" placeholder="password" required="true"
+							ng-model="{{password}}" />
+						<input
+							class="form-control password-control" type="password"
+							name="password2" placeholder="password" required="true"
+							ng-model="{{password}}" />
+						<button class="btn btn-lg btn-primary btn-block submit-control"
+							data-loading-text="loggin in..."
+							ng-click="checkEmailExists();">Log in</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

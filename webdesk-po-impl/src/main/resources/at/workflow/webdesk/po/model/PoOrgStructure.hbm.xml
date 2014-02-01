@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class table="PoOrgStructure" name="at.workflow.webdesk.po.model.PoOrgStructure">
+    <cache usage="read-write" />
+    <id name="UID" type="string" column="ORGSTRUCTURE_UID" length="32">
+      <generator class="uuid.hex" />
+    </id>
+    <property name="name" not-null="true">
+      <column name="name" unique-key="name_and_client_unique" />
+    </property>
+    <property name="description" />
+    <property name="hierarchy" />
+    <many-to-one cascade="none" foreign-key="FK_ORGSTRUCTURE_CLIENT" not-null="true" name="client">
+      <column name="CLIENT_UID" unique-key="name_and_client_unique" />
+    </many-to-one>
+    <set inverse="true" lazy="true" name="groups">
+      <key column="ORGSTRUCTURE_UID" />
+      <one-to-many class="at.workflow.webdesk.po.model.PoGroup" />
+    </set>
+    <property name="orgType" />
+    <property name="allowOnlySingleGroupMembership" />
+  </class>
+</hibernate-mapping>

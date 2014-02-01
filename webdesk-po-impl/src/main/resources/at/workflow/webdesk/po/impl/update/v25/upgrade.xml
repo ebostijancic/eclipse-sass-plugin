@@ -1,0 +1,18 @@
+<upgrade>
+    <sql dataSource="webdesk" failOnError="false">delete from PoFile where connector_uid is not null</sql>
+    <sql dataSource="webdesk" failOnError="false">delete from PoConnector</sql>
+    
+    
+    
+    <sql dataSource="webdesk" failOnError="false">update PoConnectorLink set sourceConnector='PoPersonConnector' where sourceConnector='PoConnectorPerson'</sql>
+    <sql dataSource="webdesk" failOnError="false">update PoConnectorLink set sourceConnector='PoGroupConnector' where sourceConnector='PoConnectorGroup'</sql>
+    <sql dataSource="webdesk" failOnError="false">update PoConnectorLink set sourceConnector='TaPersonConnector' where sourceConnector='TaConnectorPerson'</sql>
+    <sql dataSource="webdesk" failOnError="false">update PoConnectorLink set sourceConnector='TaGroupConnector' where sourceConnector='TaConnectorGroup'</sql>
+    
+    <sql dataSource="webdesk" failOnError="false">update PoConnectorLink set destinationConnector='PoPersonConnector' where destinationConnector='PoConnectorPerson'</sql>
+    <sql dataSource="webdesk" failOnError="false">update PoConnectorLink set destinationConnector='PoGroupConnector' where destinationConnector='PoConnectorGroup'</sql>
+    <sql dataSource="webdesk" failOnError="false">update PoConnectorLink set destinationConnector='TaPersonConnector' where destinationConnector='TaConnectorPerson'</sql>
+    <sql dataSource="webdesk" failOnError="false">update PoConnectorLink set destinationConnector='TaGroupConnector' where destinationConnector='TaConnectorGroup'</sql>
+    
+    
+</upgrade>

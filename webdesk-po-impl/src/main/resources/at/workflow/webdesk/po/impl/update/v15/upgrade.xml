@@ -1,0 +1,7 @@
+<upgrade>
+    <!-- sets boolean flag to false, to avoid problems
+    with null values -->
+    <sql dataSource="webdesk" failOnError="false">alter table PoPerson drop column ldapname</sql>
+</upgrade>
+
+

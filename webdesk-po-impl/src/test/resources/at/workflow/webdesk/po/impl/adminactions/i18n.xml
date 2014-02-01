@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<keys>
+    <!--
+        I18n Keys for the Admin Actions!
+    -->
+    
+    <key value="po_admin_ImportTestData_error">
+        <en>While starting the PoImportTestData Action something went wrong...</en>
+        <de>Bei der Ausführung der PoImportTestData Aktion ist ein Fehler aufgetreten</de>
+    </key>
+    
+    <key value="po_admin_ImportTestData_success">
+        <en>Import of testdata successfully finished!</en>
+        <de>Import von Testdaten war erfolgreich!</de>
+    </key>
+    
+    <key value="po_admin_ImportTestData_caption">
+        <en>Generate Testdata for PO (clients, groups, persons)</en>
+        <de>Testdaten für PO (Mandant,Gruppen,Personen) anlegen</de>
+    </key>
+    
+</keys>
+    

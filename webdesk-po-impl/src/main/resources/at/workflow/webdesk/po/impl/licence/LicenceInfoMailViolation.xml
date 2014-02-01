@@ -1,0 +1,39 @@
+<html>
+<body>
+<p>
+Dear Webdesk Administrator!
+</p>
+<p>This is an automatic mail from the webdesk ewp system. Do not reply! It was generated because a webdesk user
+or a webdesk job tried to create objects (f.i. employees or users), which would violate your currently purchased licence.</p>
+
+<br/>
+Your current licence status:<br/>
+
+<br/>
+Licence holder: ${company}, ${companyDesc} 
+<br/>
+
+<table border="1">
+<tr>
+    <th>Licence</th>
+    <th>Description</th>
+    <th>Currently in Use</th>
+    <th>Licenced Max</th>
+</tr>
+#foreach( $licInfo in $licenceInfos )
+	<tr>
+	   <td>$licInfo.name</td>
+	   <td>$languageService.translate( $licInfo.description )</td>
+	   #set( $maxInUse = $licInfo.maxInUse - 1)
+	   <td>$maxInUse</td>
+	   <td>$licInfo.amount</td>
+	</tr>
+#end
+</table>
+
+<br/>
+<p>Please contact your local sales representative or directly Workflow EDV GmbH at +43 1 7188842 0</p>
+<br/>
+<p>Yours sincerly, The webdesk system</p>
+</body>
+</html>

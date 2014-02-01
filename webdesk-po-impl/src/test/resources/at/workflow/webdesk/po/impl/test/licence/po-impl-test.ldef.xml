@@ -1,0 +1,26 @@
+<licence-defs>
+
+    <licence>
+        <name>sysadmin-users</name>
+        <module>xx</module>
+        <contexts>
+        </contexts>
+        <actions>
+            <action>xx_action1</action>
+            <action>xx_action2</action>
+        </actions>
+        <isNegativeList>false</isNegativeList>
+    </licence>
+    <licence>
+        <name>sysadmin-full</name>
+        <modules>xx,xy</modules>
+        <contexts>
+        </contexts>
+        <actions>
+            <action>xx_action1</action>
+            <action>xy_*</action>
+        </actions>
+        <isNegativeList>false</isNegativeList>
+    </licence>
+    
+</licence-defs>

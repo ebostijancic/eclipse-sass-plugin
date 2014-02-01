@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+    
+    <appender name="WEBDESK_DB" class="at.workflow.webdesk.po.impl.PoLogAppenderImpl">
+        <param name="sessionFactoryBeanName" value="sessionFactory"/>
+    </appender>
+    
+    <appender name="CON" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-5p : %m - %c [%d] %n"/>
+        </layout>
+    </appender>
+    
+    <category name="at.workflow" additivity="false">
+        <priority value="INFO"/>
+        <appender-ref ref="CON"/>
+    </category>
+    
+    <category additivity="false" name="webdesk.jobs">
+        <priority value="INFO" />
+        <appender-ref ref="WEBDESK_DB" />
+        <appender-ref ref="CON"/>
+    </category>
+    
+    <category additivity="false" name="webdesk.connectors">
+        <priority value="INFO" />
+        <appender-ref ref="WEBDESK_DB" />
+        <appender-ref ref="CON"/>
+    </category>
+    
+    <root>
+        <priority value="ERROR"/>
+        <appender-ref ref="CON"/>
+    </root>
+    
+</log4j:configuration>

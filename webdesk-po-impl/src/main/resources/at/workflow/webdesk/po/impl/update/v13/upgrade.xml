@@ -1,0 +1,7 @@
+<upgrade>
+    <!-- sets boolean flag to false, to avoid problems
+    with null values -->
+    <sql dataSource="webdesk">update pofieldmapping set writeOnInsertOnly=0 where writeOnInsertOnly is null</sql>
+</upgrade>
+
+

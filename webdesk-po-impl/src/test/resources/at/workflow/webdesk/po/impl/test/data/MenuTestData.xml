@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<exportdata xmlns:i18n="http://apache.org/cocoon/i18n/2.1">
+    <clients>
+        <client name="Workflex" />
+        <client name="Workflow" />
+    </clients>
+    <structures>
+        <structure name="Organigramm">
+            <hierarchy>true</hierarchy>
+            <orgtype>1</orgtype>
+            <client>Workflex</client>
+        </structure>
+    </structures>
+    
+    <groups>
+        <group name="G01">
+            <description>Geschäftsführung</description>
+            <client>Workflex</client>
+            <structure>Organigramm</structure>
+        </group>
+        <group name="G02">
+            <description>Vorstand</description>
+            <client>Workflex</client>
+            <structure>Organigramm</structure>
+        </group>
+    </groups>
+
+    <roles>
+		<role name="R01">
+            <roleholder>
+                <competencetarget type="group">G01</competencetarget>
+                <group name="G01"/>
+            </roleholder>
+        </role>
+        <role name="R02">
+            <roleholder>
+                <competencetarget type="group">G01</competencetarget>
+                <person id="wef" />
+            </roleholder>
+        </role>
+    </roles>
+    
+    <persons>
+        <person id="wef">
+            <ldapname>wef</ldapname>
+            <name>Weiss Florian</name>
+            <username>wef</username>
+            <password>wef</password>
+            
+            <mailboxid>mail\wef</mailboxid>
+            <mailserver>CN=webdesksrv1/o=Zeit</mailserver>
+            <mailaddress>Florian.Weiss@workflex.at</mailaddress>
+            <firstname>Florian</firstname>
+            <lastname>Weiss</lastname>
+            <taId>10</taId>
+            <employeeid>0096</employeeid>
+            <group>G01</group>
+        </person>
+        <person id="mmu">
+            <ldapname>mmu</ldapname>
+            <name>Max Mustermann</name>
+            <username>mmu</username>
+            <password>mmu</password>
+            
+            <mailboxid>mail\mmu</mailboxid>
+            <mailserver>CN=webdesksrv1/o=Zeit</mailserver>
+            <mailaddress>Max.Mustermann@workflex.at</mailaddress>
+            <firstname>Max</firstname>
+            <lastname>Mustermann</lastname>
+            <taId>12</taId>
+            <employeeid>0097</employeeid>
+            <group>G02</group>
+        </person>
+    </persons>
+    
+    <actions>
+        <action>
+            <actiontype>1</actiontype>
+            <name>po_showClients</name>
+            <caption>Mandanten</caption>
+            <description>Show clients</description>
+            <defaultpermissiontype>0</defaultpermissiontype>
+            <viewpermissions>0</viewpermissions>
+            <actionfolder>po</actionfolder>
+            <imageset>nuvola</imageset>
+            <image>mimetypes/file_temporary.png</image>
+        </action>
+        <action>  	
+            <actiontype>1</actiontype>
+            <name>po_showOrgStructures</name>
+            <caption>OrgStructures</caption>
+            <description>Show org structures</description>
+            <defaultpermissiontype>0</defaultpermissiontype>
+            <viewpermissions>0</viewpermissions>
+            <actionfolder>po</actionfolder>
+            <imageset>nuvola</imageset>
+            <image>mimetypes/file_temporary.png</image>
+        </action>
+        <action>  	
+            <actiontype>1</actiontype>
+            <name>po_showRoles</name>
+            <caption>Roles</caption>
+            <description>Show roles</description>
+            <defaultpermissiontype>0</defaultpermissiontype>
+            <viewpermissions>0</viewpermissions>
+            <actionfolder>po</actionfolder>
+            <imageset>nuvola</imageset>
+            <image>mimetypes/file_temporary.png</image>
+        </action>
+        <action>
+            <actiontype>1</actiontype>
+            <name>po_editMenuTree</name>
+            <caption>MenuTree</caption>
+            <description>Show menu tree</description>
+            <defaultpermissiontype>0</defaultpermissiontype>
+            <viewpermissions>0</viewpermissions>
+            <actionfolder>po</actionfolder>
+            <imageset>nuvola</imageset>
+            <image>mimetypes/file_temporary.png</image>
+        </action>
+        <action>
+            <actiontype>1</actiontype>
+            <name>po_editMenuTreeExtended</name>
+            <caption>MenuTreeEx</caption>
+            <description>Show menu tree</description>
+            <defaultpermissiontype>0</defaultpermissiontype>
+            <viewpermissions>0</viewpermissions>
+            <actionfolder>po</actionfolder>
+            <imageset>nuvola</imageset>
+            <image>mimetypes/file_temporary.png</image>
+        </action>
+        
+    </actions>
+    
+    <actionpermissions>
+        
+        <actionpermission>
+            <action>po_showClients</action>
+            <client>Workflex</client>
+            <actiontype>1</actiontype>
+            <viewpermissiontype>1</viewpermissiontype>
+        </actionpermission>	
+        
+        <actionpermission>
+            <action>po_showOrgStructures</action>
+            <client>Workflex</client>
+            <actiontype>1</actiontype>
+            <viewpermissiontype>1</viewpermissiontype>
+        </actionpermission>	
+        
+        <actionpermission>
+            <action>po_showRoles</action>
+            <client>Workflex</client>
+            <actiontype>1</actiontype>
+            <viewpermissiontype>1</viewpermissiontype>
+        </actionpermission>	
+        
+        <actionpermission>
+            <action>po_editMenuTree</action>
+            <client>Workflex</client>
+            <actiontype>1</actiontype>
+            <viewpermissiontype>1</viewpermissiontype>
+        </actionpermission>	
+        
+        <actionpermission>
+            <action>po_showClients</action>
+            <client>Workflex</client>
+            <actiontype>1</actiontype>
+            <viewpermissiontype>1</viewpermissiontype>
+        </actionpermission>	
+        
+        <actionpermission>
+            <action>po_editMenuTreeExtended</action>
+            <client>Workflex</client>
+            <actiontype>1</actiontype>
+            <viewpermissiontype>1</viewpermissiontype>
+        </actionpermission>	
+        
+        <actionpermission>
+            <action>po_editMenuTreeExtended</action>
+            <client>Workflow</client>
+            <actiontype>1</actiontype>
+            <viewpermissiontype>1</viewpermissiontype>
+        </actionpermission>
+        
+        <actionpermission>
+            <action>po_showClients</action>
+            <client>Workflow</client>
+            <actiontype>1</actiontype>
+            <viewpermissiontype>1</viewpermissiontype>
+        </actionpermission>
+    </actionpermissions>	
+    
+</exportdata>

@@ -1,0 +1,5 @@
+<upgrade>
+    
+    <sql dataSource="webdesk" failOnError="true">update PoAction set allowUpdateOnVersionChange = 1 where allowUpdateOnVersionChange is null</sql>
+    
+</upgrade>

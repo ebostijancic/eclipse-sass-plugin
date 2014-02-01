@@ -1,0 +1,7 @@
+<upgrade>
+    
+    <!-- sets column-length to 1000 chars  --> 
+    <!-- sql for mssql, db2 and oracle not yet tested --> 
+    <sql dataSource="webdesk" failOnError="true" applies="*">alter table PoJobTrigger drop column groupname</sql>
+    
+</upgrade>

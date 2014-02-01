@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class lazy="true" table="PoAPermission" name="at.workflow.webdesk.po.model.PoAPermissionBase">
+    <cache usage="read-write" />
+    <id name="UID" type="string" column="APERMISSION_UID" length="32">
+      <generator class="uuid.hex" />
+    </id>
+    <discriminator type="string" column="type" length="2" />
+    <many-to-one column="ACTION_UID" cascade="none" foreign-key="FK_APERMISSION_ACTION" not-null="true" name="action" />
+    <property name="viewPermissionType" />
+    <property name="negative" />
+    <property name="validfrom" not-null="true" type="timestamp" />
+    <property name="validto" not-null="true" type="timestamp" />
+    <subclass name="at.workflow.webdesk.po.model.PoAPermissionClient" discriminator-value="AC">
+      <many-to-one column="CLIENT_UID" cascade="none" foreign-key="FK_APERMISSION_CLIENT" not-null="false" name="client" />
+    </subclass>
+    <subclass name="at.workflow.webdesk.po.model.PoAPermissionGroup" discriminator-value="AG">
+      <many-to-one column="GROUP_UID" cascade="none" foreign-key="FK_APERMISSION_GROUP" not-null="false" name="group" />
+      <property name="inheritToChilds" />
+    </subclass>
+    <subclass name="at.workflow.webdesk.po.model.PoAPermissionPerson" discriminator-value="AP">
+      <many-to-one column="PERSON_UID" cascade="none" foreign-key="FK_APERMISSION_PERSON" not-null="false" name="person" />
+    </subclass>
+    <subclass name="at.workflow.webdesk.po.model.PoAPermissionRole" discriminator-value="AR">
+      <many-to-one column="ROLE_UID" cascade="none" foreign-key="FK_APERMISSION_ROLE" not-null="false" name="role" />
+      <property name="inheritToChilds" />
+      <property name="viewInheritToChilds" />
+    </subclass>
+  </class>
+</hibernate-mapping>

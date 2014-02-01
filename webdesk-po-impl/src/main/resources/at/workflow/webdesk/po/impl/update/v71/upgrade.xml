@@ -1,0 +1,5 @@
+<upgrade>
+    
+    <sql dataSource="webdesk" failOnError="true">update PoPerson set activeUser = 1 where activeUser is null</sql>
+    
+</upgrade>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class table="PoRole" name="at.workflow.webdesk.po.model.PoRole">
+    <cache usage="read-write" />
+    <id name="UID" type="string" column="ROLE_UID" length="32">
+      <generator class="uuid.hex" />
+    </id>
+    <property name="includeHierarchicalGroup" />
+    <property name="name" />
+    <property name="description" />
+    <many-to-one column="CLIENT_UID" cascade="none" foreign-key="FK_ROLE_CLIENT" not-null="false" name="client" />
+    <set inverse="true" lazy="true" name="roleHolders">
+      <key column="ROLE_UID" />
+      <one-to-many class="at.workflow.webdesk.po.model.PoRoleCompetenceBase" />
+    </set>
+    <property name="orgType" />
+    <set inverse="true" cascade="save-update" lazy="true" name="permissions">
+      <key column="ROLE_UID" />
+      <one-to-many class="at.workflow.webdesk.po.model.PoAPermissionRole" />
+    </set>
+    <property name="roleType" />
+    <property name="participantId" />
+    <property name="doNotAllowSelfApproval" column="DoNotAllowSelfApproval" />
+    <property name="directionOfInheritance" />
+    <property name="levelsToSearch" />
+    <property name="maxLevelToSearchUp" />
+    <property name="maxRoleHoldersToReturn" />
+    <property name="doNotAllowApprovalByDeputy" />
+    <property name="hideFromLocalAdmin" />
+    <property name="validfrom" not-null="true" type="timestamp" />
+    <property name="validto" not-null="true" type="timestamp" />
+  </class>
+</hibernate-mapping>

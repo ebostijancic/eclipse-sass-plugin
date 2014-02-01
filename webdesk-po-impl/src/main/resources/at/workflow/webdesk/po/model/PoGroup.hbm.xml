@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <!--  class table="PoGroup" name="at.workflow.webdesk.po.model.PoGroup">
+    <cache usage="read-write" />
+    <id name="UID" type="string" column="GROUP_UID" length="32">
+      <generator class="uuid.hex" />
+    </id>
+    <property name="name" not-null="true" />
+    <property name="description" />
+    <set inverse="true" lazy="true" name="personGroups">
+      <key column="GROUP_UID" />
+      <one-to-many class="at.workflow.webdesk.po.model.PoPersonGroup" />
+    </set>
+    <many-to-one column="ORGSTRUCTURE_UID" cascade="none" foreign-key="FK_GROUP_ORGSTRUCTURE" lazy="false" not-null="true" name="orgStructure" />
+    <many-to-one column="CLIENT_UID" cascade="none" foreign-key="FK_GROUP_CLIENT" lazy="false" not-null="true" name="client" />
+    <set inverse="true" lazy="true" name="parentGroups">
+      <key column="CHILDGROUP_UID" />
+      <one-to-many class="at.workflow.webdesk.po.model.PoParentGroup" />
+    </set>
+    <set inverse="true" order-by="ranking" lazy="true" name="childGroups">
+      <key column="PARENTGROUP_UID" />
+      <one-to-many class="at.workflow.webdesk.po.model.PoParentGroup" />
+    </set>
+    <set inverse="true" cascade="all" lazy="true" name="referencedAsCompetenceTarget">
+      <key column="GROUP_UID" />
+      <one-to-many class="at.workflow.webdesk.po.model.PoRoleCompetenceGroup" />
+    </set>
+    <set inverse="true" cascade="all" lazy="true" name="referencedAsRoleHolder">
+      <key column="GROUP_UID" />
+      <one-to-many class="at.workflow.webdesk.po.model.PoRoleHolderGroup" />
+    </set>
+    <set inverse="true" cascade="save-update" lazy="true" name="permissions">
+      <key column="GROUP_UID" />
+      <one-to-many class="at.workflow.webdesk.po.model.PoAPermissionGroup" />
+    </set>
+    <property name="shortName" length="20" not-null="true" />
+    <property name="topLevel" column="isTopLevel" />
+    <property name="validfrom" not-null="true" type="timestamp" />
+    <property name="validto" not-null="true" type="timestamp" />
+  </class -->
+</hibernate-mapping>

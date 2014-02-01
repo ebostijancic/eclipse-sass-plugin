@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<act-descr>
+	<caption>Aktion</caption>
+	<description>Formular zum Editieren einer Aktion</description>
+	<image>actions/exec.png</image>
+	<imageset>crystalIcons</imageset>
+	<actionfolder>po</actionfolder>
+	<isconfigurable>false</isconfigurable>
+	<allowupdateonversionchange>true</allowupdateonversionchange>
+	<defaultviewpermissiontype>0</defaultviewpermissiontype>
+	<universallyallowed>false</universallyallowed>
+	<disableContinuationInvalidation>false</disableContinuationInvalidation>
+	<sqlQuery>from HrPersonGa</sqlQuery>
+	<controller>PoEditActionActionHandler</controller>
+	<controllerPattern>cocoon-flow-java</controllerPattern>
+	
+	<allowsaction>dummyAction</allowsaction>
+	<attributes>
+        <value key="defaultOrderBy">order by hiddenLastName</value>
+        <value key="alternateQueryPageDAOBeanName">HrQueryPageDAO</value>
+    </attributes>
+
+	<parameters>
+		<parameter name="uid" type="string" />
+		<parameter name="foreignKey" type="string" comment="taid" />
+		<parameter name="year" type="integer or date" pattern="4 digits or dd.MM.yyyy" />
+	</parameters>
+	
+	<urlpatterns>
+		<urlpattern name="CalendarForCurrentUserAndYear">year=$year</urlpattern>
+		<urlpattern name="CalendarForPersonUidAndYear">uid=$uid&amp;year=$year</urlpattern>
+		<urlpattern name="CalendarForPersonTaIdAndYear">foreignKey=$taid&amp;year=$year
+		</urlpattern>
+	</urlpatterns>
+	
+	<contextparameters>
+		<contextparameter name="$year" type="integer" level="table" />
+		<contextparameter name="$month" type="integer" level="tr"
+			comment="1 to 12" />
+		<contextparameter name="$day" type="string" level="td"
+			comment="DAY_OF_MONTH" />
+		<contextparameter name="$fullDate" type="string"
+			level="td" comment="full date as dd.MM.yyyy" />
+		<contextparameter name="$taid" type="string" level="td" />
+	</contextparameters>
+</act-descr>

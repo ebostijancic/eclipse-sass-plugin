@@ -1,0 +1,10 @@
+<upgrade>
+    <!--
+        REDO setting of column-length of js-property 
+        NOT yet applied at one big customer... 
+        Same as Update-Script 34 -->
+    
+    <sql dataSource="webdesk" failOnError="true" applies="*" excludes="mysql">alter table PoFieldMapping alter column jsfunction varchar(1000) null</sql>
+    <sql dataSource="webdesk" failOnError="true" applies="mysql">alter table PoFieldMapping modify jsfunction varchar(1000) null</sql>
+</upgrade>
+

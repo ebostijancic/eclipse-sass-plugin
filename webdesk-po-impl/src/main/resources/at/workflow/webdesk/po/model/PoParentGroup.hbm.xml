@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class table="PoParentGroup" name="at.workflow.webdesk.po.model.PoParentGroup">
+    <cache usage="read-write" />
+    <id name="UID" type="string" column="ACCESSGROUP_UID" length="32">
+      <generator class="uuid.hex" />
+    </id>
+    <property name="ranking" />
+    <many-to-one column="PARENTGROUP_UID" cascade="none" foreign-key="FK_PARENTGROUP_GROUP_PARENT" not-null="true" name="parentGroup"/>
+    <many-to-one column="CHILDGROUP_UID" cascade="none" foreign-key="FK_PARENTGROUP_GROUP_CHILD" not-null="true" name="childGroup" />
+    <property name="validfrom" not-null="true" type="timestamp" />
+    <property name="validto" not-null="true" type="timestamp" />
+  </class>
+</hibernate-mapping>

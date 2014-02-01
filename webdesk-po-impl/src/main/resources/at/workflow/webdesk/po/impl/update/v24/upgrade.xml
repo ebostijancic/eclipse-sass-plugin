@@ -1,0 +1,4 @@
+<upgrade>
+    <sql dataSource="webdesk" failOnError="false">delete from PoAction where name ='po_showConnectors.act'</sql>
+    <sql dataSource="webdesk" failOnError="false">delete from PoAction where name ='po_editConnector.act'</sql>
+</upgrade>

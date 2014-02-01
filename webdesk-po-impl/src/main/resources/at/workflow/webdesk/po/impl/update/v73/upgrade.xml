@@ -1,0 +1,6 @@
+<upgrade>
+    <!-- copy of update script version 51 to ensure ported scripts from 3.2.3-DEV also run -->
+    <sql dataSource="webdesk" failOnError="true">UPDATE PoOrgStructure SET allowOnlySingleGroupMembership = 1 WHERE orgType=1 or orgType=2</sql>
+    <sql dataSource="webdesk" failOnError="true">UPDATE PoOrgStructure SET allowOnlySingleGroupMembership = 0 WHERE orgType>2</sql>
+</upgrade>
+

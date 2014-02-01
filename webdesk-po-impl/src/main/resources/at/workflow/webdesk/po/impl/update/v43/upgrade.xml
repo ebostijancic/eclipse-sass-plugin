@@ -1,0 +1,5 @@
+<upgrade>
+  
+    <sql dataSource="webdesk" failOnError="false">update PoRole set doNotAllowApprovalByDeputy=1</sql>
+    
+</upgrade>

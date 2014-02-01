@@ -1,0 +1,88 @@
+<keys>
+    
+    <key value="po_validationError_valueRepetition">
+        <en>This value violates uniqueness.</en>
+        <de>Dieser Wert verletzt die Eindeutigkeit.</de>
+    </key>    
+
+    <key value="po_timelineFragment.putValidAssignment_{0}_{1}_assigned_multiple_times_{2}">
+        <en>{0} {1} is assigned more than once in interval {2}.</en>
+        <de>Das Objekt {0} {1} ist mehr als einmal im Zeitraum {2} zugewiesen.</de>
+    </key>    
+
+    <key value="po_abstractSharedTimelineHandler.assign_assignments_from_{0}_before_{1}_from_{2}">
+        <en>Assignments from-date {0} is before {1}s from-date {2}.</en>
+        <de>Gültig-von Datum der Zuweisung {0} ist vor gültig-von Datum {2} des Objekts {1}.</de>
+    </key>    
+
+    <key value="po_abstractSharedTimelineHandler.assign_{0}_to_{1}_before_assignments_to_{2}">
+        <en>{0}s to-date {1} is before assignments to-date {2}.</en>
+        <de>Gültig-bis Datum {1} des Objekts {0} ist vor gültig-bis Datum der Zuweisung {2}.</de>
+    </key>    
+
+    <key value="po_abstractSharedTimelineHandler.checkHeadersForNulls_{0}_assignments_start_{1}_after_{2}_starts_{3}">
+        <en>Assignments of {0} start on {1} after validity of the {2} starts on {3}.</en>
+        <de>Die Zuweisungen von {0} fangen am {1} an, nach dem gültig-von Datum {3} des Objekts {2}. </de>
+    </key>    
+
+    <key value="po_abstractSharedTimelineHandler.checkRowObjectsForNull_no_entity_assigned_in_row_{0}">
+        <en>No assigned entity is defined for row {0}.</en>
+        <de>In der Zeile {0} fehlt das zugewiesene Objekt.</de>
+    </key>    
+
+    <key value="po_abstractSharedTimelineHandler.checkRowObjectsForUniqueness_{0}_{1}_assigned_to_multiple_rows">
+        <en>{0} {1} is assigned to more than one row.</en>
+        <de>{0} {1} ist zugewiesen in mehreren Zeilen.</de>
+    </key>    
+
+    <key value="po_abstractSharedTimelineHandler.getIndexForFromDate_no_{0}_assignment_beginning_{1}">
+        <en>There is no assignment of {0} beginning at {1}.</en>
+        <de>Es gibt keine Zuweisung von {0} die am {1} anfängt.</de>
+    </key>    
+
+    <key value="po_abstractSharedTimelineHandler.getIndexForToDate_no_{0}_assignment_ending_{1}">
+        <en>There is no assignment of {0} ending at {1}.</en>
+        <de>Es gibt keine Zuweisung von {0} die am {1} endet.</de>
+    </key>    
+
+    <key value="po_abstractSharedTimelineHandler.getTimelineDates_from_or_to_of_column_{0}_null_{1}">
+        <en>From-date or to-date of the column {0} header is null: {1}.</en>
+        <de>Gültig-von oder gültig-bis Datum in der Spalte {0} ist null: {1}.</de>
+    </key>    
+
+    <key value="po_abstractSharedTimelineHandler.checkTargetSum_sum_{0}_of_{1}_deviates_from_{2}_{3}">
+        <en>Sum of {0} of {1} differs from target {2} in one or more time intervals: {3}.</en>
+        <de>Summe von {0} der {1} weicht von der Zielsumme {2} in einem oder mehreren Zeitabschnitten ab: {3}.</de>
+    </key>    
+
+    <key value="po_abstractSharedTimelineHandler.checkTargetSum_sum_{0}_of_{1}_of_{2}_over_{3}_from_{4}_to_{5}">
+        <en>Sum {0} of {1} of {2} is over limit {3} from {4} to {5}.</en>
+        <de>Summe {0} von {1} der {2} ist über dem Limit {3} von {4} bis {5}.</de>
+    </key>    
+
+    <key value="po_abstractSharedTimelineHandler.checkTargetSum_sum_{0}_of_{1}_of_{2}_deviatesFrom_{3}_from_{4}_to_{5}">
+        <en>Sum {0} of {1} of {2} deviates from target {3} from {4} to {5}.</en>
+        <de>Summe {0} von {1} der {2} weicht vom Zielwert {3} von {4} bis {5} ab.</de>
+    </key>    
+
+    <key value="po_abstractSharedTimelineHandler.checkForCompletness_assignments_from_{0}_to_{1}_do_not_cover_validity_of_{2}_from_{3}_to_{4}">
+        <en>Assignments from {0} to {1} do not cover the whole validity of {2} from {3} to {4}.</en>
+        <de>Die Zuordnungen im Zeitraum vom {0} bis {1} decken nicht die ganze Gültigkeitsdauer des Zielobjekts {2} von {3} bis {4}.</de>
+    </key>    
+
+    <key value="po_abstractSharedTimelineHandler.checkForOverlaps_overlapping_dates_{0}_{1}_and_{2}_{3}">
+        <en>There are overlapping dates: {0} {1} and {2} {3}.</en>
+        <de>Die Zuweisungen überschneiden sich: {0} {1} und {2} {3}.</de>
+    </key>    
+
+    <key value="po_abstractSharedTimelineHandler.checkForGaps_gap_found_from_{0}_to_{1}">
+        <en>There is a gap from {0} to {1}.</en>
+        <de>Zwischen den Zuweisungen gibt es eine Lücke von {0} bis {1}.</de>
+    </key>    
+
+    <key value="po_abstractSharedTimelineHandler_{0}_has_null_validfrom_or_validto">
+        <en>Valid from and valid to dates of the {0} must be non-null.</en>
+        <de>Die Gültig-von und Gültig-bis Datümer des {0} dürfen nicht null sein.</de>
+    </key>    
+
+</keys>

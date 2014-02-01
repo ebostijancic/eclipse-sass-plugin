@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class table="PoFile" name="at.workflow.webdesk.po.model.PoFile">
+    <cache usage="read-write" />
+    <id name="UID" type="string" column="FILE_UID" length="32">
+      <generator class="uuid.hex" />
+    </id>
+    <property name="mimeType" />
+    <property name="type" column="fileType" />
+    <property name="content" column="theContent" length="16777216" type="org.springframework.orm.hibernate3.support.BlobByteArrayType" />
+    <many-to-one column="ACTION_UID" cascade="none" foreign-key="FK_FILE_ACTION" lazy="false" not-null="false" name="action" />
+    <many-to-one column="CONNECTOR_UID" cascade="none" foreign-key="FK_FILE_CONNECTOR" lazy="false" not-null="false" name="connector" />
+    <many-to-one column="MODULE_UID" cascade="none" foreign-key="FK_FILE_MODULE" lazy="false" not-null="false" name="module" />
+    <property name="validfrom" not-null="true" type="timestamp" />
+    <property name="validto" not-null="true" />
+    <property name="path" column="filePath" />
+    <property name="size" column="fileSize"/>
+    <property name="versionNumber" />
+    <property name="timeStamp" column="fileTimeStamp" />
+    <property name="fileId" />
+    <many-to-one column="JOB_UID" cascade="none" foreign-key="FK_FILE_JOB" lazy="false" not-null="false" name="job" />
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class table="PoMenuItem" name="at.workflow.webdesk.po.model.PoMenuItem">
+    <cache usage="read-write" />
+    <id name="UID" type="string" column="MENUITEM_UID" length="32">
+      <generator class="uuid.hex" />
+    </id>
+    <property name="name" length="60" />
+    <property name="iconPath" length="50" />
+    <property name="description" />
+    <many-to-one column="MENUITEM_PARENT_UID" cascade="none" foreign-key="FK_MENUITEM_PARENT" not-null="false" name="parent" />
+    <bag inverse="true" lazy="true" name="childs">
+      <key column="MENUITEM_PARENT_UID" />
+      <one-to-many class="at.workflow.webdesk.po.model.PoMenuItem" />
+    </bag>
+    <many-to-one column="ACTION_UID" cascade="none" foreign-key="FK_MENUITEM_ACTION" not-null="false" name="action" />
+    <property name="ranking" />
+    <many-to-one column="CLIENT_UID" cascade="none" foreign-key="FK_MENUITEM_CLIENT" not-null="false" name="client" />
+    <property name="textModuleKey" />
+    <property name="templateId" />
+    <property name="validfrom" not-null="true" type="timestamp" />
+    <property name="validto" not-null="true" type="timestamp" />
+  </class>
+</hibernate-mapping>

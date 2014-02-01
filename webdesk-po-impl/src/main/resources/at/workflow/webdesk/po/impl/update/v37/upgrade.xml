@@ -1,0 +1,8 @@
+<upgrade>
+    <!-- TODO add missing db scripts -->
+    
+    <sql dataSource="webdesk" failOnError="false">alter table PoActionCache drop constraint "FK_ACTIONCACHE_PERSON"</sql>
+    
+    
+    
+</upgrade>

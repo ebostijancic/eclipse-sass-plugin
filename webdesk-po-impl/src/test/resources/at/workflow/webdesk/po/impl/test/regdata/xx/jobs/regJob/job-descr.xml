@@ -1,0 +1,18 @@
+<job>
+    <name>TestRegistration Job</name>
+    <description>Testjob for Unit Test</description>
+    <jobClass>at.workflow.webdesk.po.jobs.testJob.TestJob</jobClass>
+    <isConfigurable>false</isConfigurable>
+    <active>true</active>
+    <updateOnVersionChange>true</updateOnVersionChange>
+    <jobTriggers>
+        <trigger>
+            <name>TestRegistration Job Trigger</name> 
+            <active>true</active>
+            <startDate>1.1.06 13:34</startDate>
+            <group>WF</group>
+            <intervalMinutes></intervalMinutes>
+            <scheduleType>1</scheduleType>
+        </trigger>
+    </jobTriggers>
+</job>

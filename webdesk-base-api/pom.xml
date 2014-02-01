@@ -1,0 +1,78 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>webdesk-base-api</artifactId>
+	<groupId>at.workflow.webdesk</groupId>
+	<version>1.6.0-SNAPSHOT</version>
+
+	<name>Webdesk Base APIs</name>
+
+	<parent>
+		<groupId>at.workflow.webdesk</groupId>
+		<artifactId>webdesk-parent</artifactId>
+		<version>26-SNAPSHOT</version>
+		<relativePath>../../parent/pom.xml</relativePath>
+	</parent>
+
+	<scm>
+		<connection>scm:svn:https://extranet.workflow.at/svn/wfrepos/webdesk/tags/webdesk-base-api-1.5.0</connection>
+	</scm>
+
+	<build>
+		<!-- TODO: is this an override or can we remove this empty tag? -->
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>at.workflow.webdesk</groupId>
+			<artifactId>webdesk-annotations</artifactId>
+			<version>${webdesk-annotations-version}</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.annotation</groupId>
+			<artifactId>jsr250-api</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.6</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+		</dependency>
+	</dependencies>
+
+</project>

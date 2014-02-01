@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class table="PoKeyValueType" name="at.workflow.webdesk.po.model.PoKeyValueType">
+    <cache usage="read-write" />
+    <id name="UID" type="string" column="KEYVALUETYPE_UID" length="32">
+      <generator class="uuid.hex" />
+    </id>
+    <property name="name" />
+    <bag inverse="true" cascade="all-delete-orphan" order-by="ranking" lazy="true" name="keyValues">
+      <key column="KEYVALUETYPE_UID" />
+      <one-to-many class="at.workflow.webdesk.po.model.PoKeyValue" />
+      <filter name="po_fromDate2Infinite" condition="validto &gt; :filterFromDate" />
+    </bag>
+    <property name="description" />
+    <property name="validfrom" not-null="true" type="timestamp" />
+    <property name="validto" not-null="true" type="timestamp" />
+    <property name="allowUpdateOnVersionChange"/>
+    <filter name="po_fromDate2Infinite" condition="validto &gt; :filterFromDate" />
+  </class>
+  <filter-def name="po_fromDate2Infinite"><filter-param name="filterFromDate" type="timestamp" /></filter-def>
+</hibernate-mapping>

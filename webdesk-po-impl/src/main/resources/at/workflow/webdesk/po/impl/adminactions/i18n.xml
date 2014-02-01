@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<keys>
+    <!--
+        I18n Keys for the Admin Actions!
+    -->
+    
+    <key value="po_admin_RepairBrokenActionCaptions_error">
+        <en>While starting the PoRepairActionsCaptions Action something went wrong...</en>
+        <de>Bei der Ausführung der PoRepairActionCaptions Aktion ist ein Fehler aufgetreten</de>
+    </key>
+    
+    <key value="po_admin_RepairBrokenActionCaptions_success">
+        <en>PoRepairActionsCaptions successfully finished!</en>
+        <de>Ausführung der PoRepairActionCaptions Aktion erfolgreich!</de>
+    </key>
+    
+    <key value="po_admin_RepairBrokenActionCaptions_caption">
+        <en>Repair the Action Captions of the Default Language</en>
+        <de>Aktionsnamen der Standardsprache reparieren ([de]...)</de>
+    </key>
+    
+    <key value="po_admin_RepairBrokenActionCaptions_caption">
+        <en>Repair the Action Captions of the Default Language</en>
+        <de>Aktionsnamen der Standardsprache reparieren ([de]...)</de>
+    </key>
+    <key value="po_admin_EnforceConsistentPersonGroupOrgRelations_error">
+        <en>While starting the EnforceConsistentPersonGroupOrgRelations Action something went wrong...</en>
+        <de>Bei der Ausführung der EnforceConsistentPersonGroupOrgRelations Aktion ist ein Fehler aufgetreten</de>
+    </key>
+    <key value="po_admin_EnforceConsistentPersonGroupOrgRelations_success">
+        <en>EnforceConsistentPersonGroupOrgRelations successfully finished!</en>
+        <de>Ausführung der EnforceConsistentPersonGroupOrgRelations Aktion erfolgreich!</de>
+    </key>
+    
+    <key value="po_admin_EnforceConsistentPersonGroupOrgRelations_caption">
+        <en>Enforce consistent Person-group relations</en>
+        <de>Personen zu hierarchische Gruppen Beziehungen Konsistenzcheck</de>
+    </key>    
+    
+    <!-- EnforceSingleCostCenterPersonRelations --> 
+    <key value="po_admin_EnforceSingleCostCenterPersonRelations_caption">
+        <en>Enforce consistent Person-costcenter group relations</en>
+        <de>Personen zu Kostenstellen Gruppen Beziehungen singulär machen</de>
+    </key>
+    <key value="po_admin_EnforceSingleCostCenterPersonRelations_success">
+        <en>EnforceSingleCostCenterPersonRelations successfully finished!</en>
+        <de>Ausführung der EnforceSingleCostCenterPersonRelations Aktion erfolgreich!</de>
+    </key>
+    <key value="po_admin_EnforceSingleCostCenterPersonRelations_error">
+        <en>While starting the EnforceSingleCostCenterPersonRelations Action something went wrong...</en>
+        <de>Bei der Ausführung der EnforceSingleCostCenterPersonRelations Aktion ist ein Fehler aufgetreten</de>
+    </key>
+    
+    <key value="po_admin_RefreshMenuStructureFolderNames_error">
+        <en>While starting the RefreshMenuStructureFolderNames Action something went wrong...</en>
+        <de>Bei der Ausfürung der RefreshMenuStructureFolderNames Aktion ist ein Fehler aufgetreten</de>
+    </key>
+    
+    <key value="po_admin_RefreshMenuStructureFolderNames_success">
+        <en>RefreshMenuStructureFolderNames successfully finished!</en>
+        <de>Ausführung der RefreshMenuStructureFolderNames Aktion erfolgreich!</de>
+    </key>
+    <key value="po_admin_RefreshMenuStructureFolderNames_caption">
+        <en>Refresh all Foldernames of the Menustructures!</en>
+        <de>Foldernamen aller Menüs reparieren!</de>
+    </key>
+    
+    <key value="po_admin_initAllowedActions_caption">
+        <en>Initialization of allowed actions!</en>
+        <de>Auffrischung der erlaubten Aktionen!</de>
+    </key>
+    <key value="po_admin_initAllowedActions_success">
+        <en>Allowed action successfully initialized!</en>
+        <de>Erlaubte Aktionen erfolgreich aufgefrischt!</de>
+    </key>
+    <key value="po_admin_initAllowedActions_error">
+        <en>Allowed actions could not be initialized!</en>
+        <de>Erlaubte Aktionen konnten nicht aufgefrischt werden!</de>
+    </key>
+    
+    
+    <key value="po_admin_ResetAllPasswords_caption">
+        <en>Reset all passwords</en>
+        <de>Alle Passwörter zurücksetzen</de>
+    </key>
+    
+    <key value="po_admin_ResetAllPasswords_success">
+        <en>All passwords have been reset successfully!</en>
+        <de>Alle Passwörter wurden erfolgreich zurückgesetzt!</de>
+    </key>
+    
+    <key value="po_admin_ResetAllPasswords_error">
+        <en>Passwords could not be reset.</en>
+        <de>Die Passwörter konnten nicht zurückgesetzt werden.</de>
+    </key>
+    
+
+    <key value="po_admin_ResetAllPasswordsToRandomAndSendMails_caption">
+        <en>Reset all passwords to random values and send mails</en>
+        <de>Alle Passwörter zurücksetzen auf Zufallswerte und Mails senden</de>
+    </key>
+    
+    <key value="po_admin_ResetAllPasswordsToRandomAndSendMails_success">
+        <en>All passwords have been reset to random values successfully, and mails have been sent to users!</en>
+        <de>Alle Passwörter wurden erfolgreich auf Zufallswerte zurückgesetzt, und Mails wurden an die Benutzer versendet!</de>
+    </key>
+    
+    <key value="po_admin_ResetAllPasswordsToRandomAndSendMails_error">
+        <en>Passwords could not be reset to random values.</en>
+        <de>Die Passwörter konnten nicht auf Zufallswerte zurückgesetzt werden.</de>
+    </key>
+    
+    <key value="po_admin_DeactivateAllJobs_caption">
+        <en>Deactivate all Jobs</en>
+        <de>Deaktiviere alle Jobs</de>
+    </key>
+    
+    <key value="po_admin_DeactivateAllJobs_success">
+        <en>All jobs have been deactivated!</en>
+        <de>Alle Jobs wurden deaktiviert!</de>
+    </key>
+    
+    <key value="po_admin_DeactivateAllJobs_error">
+        <en>While deactivating the jobs an error occured.</en>
+        <de>Auf Grund eines Fehlers konnten nicht alle Jobs deaktiviert werden!</de>
+    </key>
+    
+    
+</keys>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"></meta>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+
+<link rel="stylesheet" type="text/css" media="screen" th:href="@{/assets/css/bootstrap.css}"></link>
+<link rel="stylesheet" type="text/css" media="screen" th:href="@{/assets/css/bootstrap-theme.css}"></link>
+<link rel="stylesheet" type="text/css" media="screen" th:href="@{/assets/css/login/style.css}"></link>
+
+<script th:src="@{/assets/js/jquery-1.10.2.js}"></script>
+<script th:src="@{/assets/js/angular.js}"></script>
+<script th:src="@{/assets/js/bootstrap.js}"></script>
+
+</head>
+<body>
+	<div class="container">
+		<div class="login-container">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h2>Login</h2>
+				</div>
+				<form th:action="@{/login}" 
+					  method="post" 
+					  class="form-signin" 
+					  role="form" >
+					  
+					<div class="panel-body">
+						<input class="form-control username-control" 
+							   type="text"
+							   name="username" 
+							   placeholder="username" 
+							   required="true" 
+							   autofocus="true" />
+						<input class="form-control password-control" 
+							   type="password" 
+							   name="password" 
+							   placeholder="password" 
+							   required="true" />
+						<button class="btn btn-lg btn-primary btn-block submit-control"
+							    data-loading-text="loggin in..." type="submit">Log in</button>
+					</div>
+					
+<!-- 					<input type="hidden"                         -->
+<!--         				   name="${_csrf.parameterName}" -->
+<!--        					   value="${_csrf.token}" /> -->
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

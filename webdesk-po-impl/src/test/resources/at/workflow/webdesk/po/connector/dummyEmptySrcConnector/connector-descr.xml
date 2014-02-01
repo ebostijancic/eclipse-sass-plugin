@@ -1,0 +1,7 @@
+<connector>
+    <name>DummyEmptySrcConnector</name>
+    <className>at.workflow.webdesk.po.connector.dummyEmptySrcConnector.DummyEmptySrcConnector</className>
+    <configurable>false</configurable>
+    <updateOnVersionChange>true</updateOnVersionChange>
+    <writeable>false</writeable>
+</connector>

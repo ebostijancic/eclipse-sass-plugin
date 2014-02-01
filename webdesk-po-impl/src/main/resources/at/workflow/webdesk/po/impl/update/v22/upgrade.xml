@@ -1,0 +1,5 @@
+<upgrade>
+    <sql dataSource="webdesk" failOnError="false">alter table PoTextModule drop validfrom</sql>
+    <sql dataSource="webdesk" failOnError="false">alter table PoTextModule drop validto</sql>
+    
+</upgrade>

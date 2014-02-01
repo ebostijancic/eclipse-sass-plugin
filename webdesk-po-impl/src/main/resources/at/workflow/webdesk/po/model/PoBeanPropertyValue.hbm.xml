@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class table="PoBeanPropertyValue" name="at.workflow.webdesk.po.model.PoBeanPropertyValue">
+    <id name="UID" type="string" column="BEANVALUE_UID" length="32">
+      <generator class="uuid.hex" />
+    </id>
+    <many-to-one column="BEAN_UID" cascade="none" foreign-key="FK_BEANPROPERTYVALUE_PROPERTY" not-null="false" name="bean" />
+    <property name="property" />
+    <property name="listIndex" column="LISTINDEX" />
+  </class>
+</hibernate-mapping>

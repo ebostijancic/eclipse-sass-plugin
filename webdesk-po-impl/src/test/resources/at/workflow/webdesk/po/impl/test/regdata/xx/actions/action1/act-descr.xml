@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<act-descr>
+    <caption>Dateien</caption>
+    <description>Formular um Dateiinhalte anzuzeigen</description>
+    <image>actions/filenew.png</image>
+    <imageset>crystalIcons</imageset>
+    <actionfolder>po</actionfolder>
+    <isconfigurable>false</isconfigurable>
+    <allowupdateonversionchange>true</allowupdateonversionchange>
+    <defaultviewpermissiontype>0</defaultviewpermissiontype>
+    <sqlQuery />
+    <controller>PoEditFileActionHandler</controller>
+    <controllerPattern>cocoon-flow-java</controllerPattern>    
+</act-descr>
+

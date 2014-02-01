@@ -1,0 +1,5 @@
+<upgrade>
+      <sql dataSource="webdesk" failOnError="false" applies="*">
+            alter table pofieldmapping drop column classBasedConverter
+      </sql>
+</upgrade>

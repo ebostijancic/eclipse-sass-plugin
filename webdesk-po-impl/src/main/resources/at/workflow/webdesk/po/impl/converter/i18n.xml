@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<keys>
+    
+    <key value="converter_DateToStringConverter">
+        <en>Date -> String</en>
+        <de>Datum -> Zeichenfolge</de>
+    </key>
+    
+    <key value="converter_StringToDateConverter">
+        <en>String -> Date</en>
+        <de>Zeichenfolge -> Datum</de>
+    </key>
+
+    <key value="converter_StringToIntegerConverter">
+        <en>String -> Integer</en>
+        <de>Zeichenfolge -> ganze Zahl</de>
+    </key>
+
+    <key value="converter_StringToDoubleConverter">
+        <en>String -> Float value</en>
+        <de>Zeichenfolge -> Gleitkommazahl</de>
+    </key>
+    <key value="converter_NumberToStringConverter">
+        <en>Number -> String value</en>
+        <de>Zahl -> Zeichenfolge</de>
+    </key>
+    
+
+
+    <key value="po_no_converter">
+        <en>no conversion</en>
+        <de>keine Konvertierung</de>
+    </key>
+    
+    
+</keys>

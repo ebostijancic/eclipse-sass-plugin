@@ -1,0 +1,9 @@
+<upgrade>
+    <sql dataSource="webdesk" failOnError="true" applies="*">
+          update PoConnector set className='at.workflow.webdesk.po.connector.dbConnector.DbConnectorImpl2' where className='at.workflow.webdesk.po.connector.dbConnector2.DbConnectorImpl2'
+    </sql>
+    <sql dataSource="webdesk" failOnError="true" applies="*">
+          update PoConnector set className='at.workflow.webdesk.po.connector.dbConnector.DbConnectorImpl2' where className='at.workflow.webdesk.po.connector.dbConnector.DbConnectorImpl'
+    </sql>
+    <java>at.workflow.webdesk.po.impl.update.v95.PoUpdateConnectorsWithFlowDirection</java>
+</upgrade>

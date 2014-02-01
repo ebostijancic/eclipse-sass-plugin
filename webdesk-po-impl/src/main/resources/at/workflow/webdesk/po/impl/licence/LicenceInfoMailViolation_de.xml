@@ -1,0 +1,41 @@
+<html>
+<body>
+<p>
+Sehr geehrter Webdesk Administrator!
+</p>
+<p>Dies ist ein automatisch generiertes Mail aus dem Webdesk EWP System. Bitte auf dieses Mail nicht antworten! 
+Es wurde generiert, da ein Webdesk Benutzer oder ein Job versucht hat, Objekte (z.b. Mitarbeiter oder User) anzulegen, welche die gekaufte Lizenz verletzen würde.</p>
+
+<br/>
+Ihr derzeitiger Lizenz-Status:<br/>
+
+<br/>
+Lizenznehmer: ${company}, ${companyDesc} 
+<br/>
+
+
+<table border="1">
+<tr>
+    <th>Lizenz</th>
+    <th>Beschreibung</th>
+    <th>In Verwendung</th>
+    <th>Lizenziert (max. Anzahl)</th>
+</tr>
+#foreach( $licInfo in $licenceInfos )
+	<tr>
+	   <td>$licInfo.name</td>
+	   <td>$languageService.translate( $licInfo.description )</td>
+	   #set( $maxInUse = $licInfo.maxInUse - 1)
+	   <td>$maxInUse</td>
+	   <td>$licInfo.amount</td>
+	</tr>
+#end
+</table>
+
+<br/>
+<p>Bitte kontaktieren Sie Ihren lokalen Ansprechpartner oder direkt Workflow EDV GmbH unter folgender Telefonnummer +43 1 7188842 0</p>
+<br/>
+<p>mit freundlichen Grüssen<br/>
+das Webdesk EWP System</p>
+</body>
+</html>

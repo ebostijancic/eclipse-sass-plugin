@@ -1,0 +1,8 @@
+<upgrade>
+    <!-- TODO add missing db scripts -->
+    
+    <sql dataSource="webdesk" failOnError="true" applies="mssql">update PoRoleHolder set validto='01.01.3000 00:00:00' where validto>{ fn CURDATE() }</sql>
+    
+    
+    
+</upgrade>

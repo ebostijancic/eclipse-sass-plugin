@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class table="PoTextModule" name="at.workflow.webdesk.po.model.PoTextModule">
+    <cache usage="read-write" />
+    <id name="UID" type="string" column="TEXTMODULE_UID" length="32">
+      <generator class="uuid.hex" />
+    </id>
+    <property name="name">
+      <column name="NAME" unique-key="nameAndLanguage" index="i_nameAndLanguage" />
+    </property>
+    <property name="value" column="theValue" length="1000" />
+    <many-to-one cascade="none" foreign-key="FK_TEXTMODULE_LANGUAGE" not-null="true" name="language">
+      <column name="LANGUAGE_UID" unique-key="nameAndLanguage" index="i_nameAndLanguage" />
+    </many-to-one>
+    <many-to-one column="ACTION_UID" cascade="none" foreign-key="FK_TEXTMODULE_ACTION" not-null="false" name="action" />
+    <many-to-one column="TEXTMODULE_PARENT_UID" cascade="none" foreign-key="FK_TEXTMODULE_TEXTMODULE" not-null="false" name="parent" />
+    <property name="allowUpdateOnVersionChange" />
+    <set inverse="true" lazy="true" name="childs">
+      <key column="TEXTMODULE_PARENT_UID" />
+      <one-to-many class="at.workflow.webdesk.po.model.PoTextModule" />
+    </set>
+    <many-to-one column="MODULE_UID" cascade="none" foreign-key="FK_TEXTMODULE_MODULE" not-null="false" name="module" />
+    <property name="lastModified" />
+  </class>
+</hibernate-mapping>
