@@ -1,5 +1,0 @@
-<upgrade>
-      <sql dataSource="webdesk" failOnError="false" applies="*">
-            update PoConnectorLink set convertNullToEmptyString=0 where convertNullToEmptyString is null
-      </sql>
-</upgrade>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/sass-editor.feature_0.0.1.qualifier.jar" id="sass-editor.feature" version="0.0.1.qualifier"/>
+</site>

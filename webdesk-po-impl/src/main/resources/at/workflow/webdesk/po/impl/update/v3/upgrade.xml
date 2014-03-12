@@ -1,9 +1,0 @@
-<upgrade>
-    <sql dataSource="webdesk">update poaction set universallyAllowed=0 where universallyAllowed is null</sql>
-    
-    <!-- prior to this version changes were not injected. as the db model changed
-    make sure the older beanproperties with incorrect beanName oder listindex are deleted! -->
-    <sql dataSource="webdesk">delete from pobeanpropertyvalue where listindex is null</sql>
-    <sql dataSource="webdesk">delete from pobeanproperty where beanName is null and bean_uid not in
-        (select bean_UID from pobeanpropertyvalue)</sql>
-</upgrade>

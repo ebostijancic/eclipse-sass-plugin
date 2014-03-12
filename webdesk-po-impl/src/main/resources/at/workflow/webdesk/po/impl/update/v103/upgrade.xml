@@ -1,9 +1,0 @@
-  
-<upgrade>    
-    <!--  remove existing PoPersonImageDimensions bean values -->
-    <sql dataSource="webdesk" failOnError="true" applies="*">DELETE FROM pobeanpropertyvalue where bean_uid in (SELECT bean_uid FROM pobeanproperty p where beanName='PoPersonImageDimensions')</sql>
-
-    <!--  remove existing PoPersonImageDimensions bean properties -->
-    <sql dataSource="webdesk" failOnError="true" applies="*">DELETE FROM pobeanproperty where beanName='PoPersonImageDimensions'</sql>
-</upgrade>
- 

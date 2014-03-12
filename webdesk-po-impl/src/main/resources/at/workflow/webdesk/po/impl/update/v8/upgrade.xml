@@ -1,5 +1,0 @@
-<upgrade>
-    <!-- sets flag to false, that no automatic updates on existing actions 
-    are done in the future -->
-    <sql dataSource="webdesk">update PoAction set allowUpdateOnVersionChange=0</sql>
-</upgrade>

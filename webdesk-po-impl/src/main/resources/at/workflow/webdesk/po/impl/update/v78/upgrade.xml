@@ -1,5 +1,0 @@
-<upgrade>
-    
-    <sql dataSource="webdesk" failOnError="true">update PoPerson set MailNotifOnAssignAsDeputy = 0 where MailNotifOnAssignAsDeputy is null</sql>
-    
-</upgrade>

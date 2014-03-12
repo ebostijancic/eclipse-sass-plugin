@@ -1,3 +1,0 @@
-<upgrade>
-    <sql dataSource="webdesk">update PoKeyValueType set allowUpdateOnVersionChange=0 where allowUpdateOnVersionChange is null</sql>
-</upgrade>

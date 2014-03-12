@@ -1,8 +1,0 @@
-<upgrade>
-    <!-- sets flag to false, that no automatic updates on captions and
-        descriptions of existing actions 
-        are done in the future, when the registration runs -->
-    <sql dataSource="webdesk">update potextmodule set allowUpdateOnVersionChange=0 where name like '%action_caption' or name like '%action_description'</sql>
-</upgrade>
-
-

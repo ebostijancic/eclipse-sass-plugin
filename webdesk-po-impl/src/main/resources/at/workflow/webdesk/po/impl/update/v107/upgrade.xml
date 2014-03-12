@@ -1,5 +1,0 @@
-<upgrade>
-	<!--  change from string to boolean -->
-    <sql dataSource="webdesk" applies="*" excludes="mysql,oracle">alter table PoPersonBankAccount alter column primaryAccount bit</sql>
-    <sql dataSource="webdesk" applies="mysql,oracle">alter table PoPersonBankAccount modify column primaryAccount bit</sql>	
-</upgrade>

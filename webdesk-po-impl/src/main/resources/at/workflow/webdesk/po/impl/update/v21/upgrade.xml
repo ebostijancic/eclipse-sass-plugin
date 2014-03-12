@@ -1,6 +1,0 @@
-<upgrade>
-	<!--  Table wird immer (auch wenn korrekt angelegt) gelöscht. D.h. der Server muss 
-		  zweimal gestartet werden. Hab diesbezüglich noch keine Alternative gefunden. 
-	 -->
-    <sql dataSource="webdesk" failOnError="false">drop table PoSystemMessage</sql>
-</upgrade>

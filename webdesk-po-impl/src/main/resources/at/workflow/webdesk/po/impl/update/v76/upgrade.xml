@@ -1,5 +1,0 @@
-<upgrade>
-    
-    <sql dataSource="webdesk" failOnError="true">update PoAPermission set negative = 0 where negative is null</sql>
-    
-</upgrade>

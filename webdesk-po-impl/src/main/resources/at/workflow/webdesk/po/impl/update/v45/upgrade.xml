@@ -1,5 +1,0 @@
-<upgrade>
-    
-    <sql dataSource="webdesk" failOnError="false">update PoAPermission set inherittochilds=0 where inheritToChilds is null</sql>
-    
-</upgrade>

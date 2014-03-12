@@ -1,7 +1,0 @@
-  
-<upgrade>    
-    <!--  change length of name column in PoLogRequestParameter to 255 -->
-    <sql dataSource="webdesk" failOnError="false" applies="*" excludes="mysql,oracle">alter table PoLogRequestParameter alter column name varchar(255) null</sql>
-    <sql dataSource="webdesk" failOnError="false" applies="mysql,oracle">alter table PoLogRequestParameter modify name varchar(255)</sql>
-</upgrade>
- 

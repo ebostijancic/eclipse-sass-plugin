@@ -1,5 +1,0 @@
-<upgrade>
-    <sql dataSource="webdesk" failOnError="false">update PoBeanProperty set type=0 where type is null</sql>
-    <sql dataSource="webdesk" failOnError="false">alter table PoBeanProperty drop column listindex</sql>
-    <sql dataSource="webdesk" failOnError="false">alter table PoBeanPropertyValue drop column type</sql>
-</upgrade>

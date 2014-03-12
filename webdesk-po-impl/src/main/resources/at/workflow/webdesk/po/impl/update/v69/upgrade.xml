@@ -1,7 +1,0 @@
-<upgrade>
-    <rename type="beanproperty" old="PoUtilServiceTarget.smtpServer" new="PoMailServerConfiguration.adress" />
-    <rename type="beanproperty" old="PoUtilServiceTarget.smtpServerPort" new="PoMailServerConfiguration.port" />
-    <rename type="beanproperty" old="PoUtilServiceTarget.smtpServerUser" new="PoMailServerConfiguration.userName" />
-    <rename type="beanproperty" old="PoUtilServiceTarget.smtpServerPassword" new="PoMailServerConfiguration.password" />
-    <rename type="beanproperty" old="PoUtilServiceTarget.defaultSender" new="PoMailServerConfiguration.defaultSender" />
-</upgrade>

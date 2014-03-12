@@ -1,6 +1,0 @@
-<upgrade>
-
-    <sql dataSource="webdesk" failOnError="true" applies="*" excludes="mysql,oracle">alter table PoPerson alter column CLIENT_UID varchar(32) not null</sql>
-    <sql dataSource="webdesk" failOnError="true" applies="mysql,oracle">alter table PoPerson modify CLIENT_UID varchar(32) not null</sql>
-
-</upgrade>

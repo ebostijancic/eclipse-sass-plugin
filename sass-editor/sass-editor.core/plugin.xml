@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            label="sass-editor Sample Action Set"
+            visible="true"
+            id="sass-editor.core.actionSet">
+         <menu
+               label="sass-editor Sample &amp;Menu"
+               id="sampleMenu">
+            <separator
+                  name="sampleGroup">
+            </separator>
+         </menu>
+         <action
+               label="&amp;sass-editor Sample Action"
+               icon="icons/sample.gif"
+               class="org.bostijancic.eclipse.sass.editor.core.SampleAction"
+               tooltip="Hello, Mavenized Eclipse. sass-editor is built with Tycho"
+               menubarPath="sampleMenu/sampleGroup"
+               toolbarPath="sampleGroup"
+               id="org.bostijancic.eclipse.sass.editor.core.SampleAction">
+         </action>
+      </actionSet>
+   </extension>
+
+</plugin>

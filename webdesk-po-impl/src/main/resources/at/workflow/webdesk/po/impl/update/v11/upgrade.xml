@@ -1,6 +1,0 @@
-<upgrade>
-    <!-- deletes custom pofiles in directory webdesk -->
-    <sql dataSource="webdesk">delete from pofile where path like '%webdesk/actions/custom%'</sql>
-</upgrade>
-
-

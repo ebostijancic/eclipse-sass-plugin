@@ -1,7 +1,0 @@
-<upgrade>
-    <!-- sets boolean flag to false, to avoid problems
-    with null values -->
-    <sql dataSource="webdesk">update pofieldmapping set writeBackPrimaryKey=0 where writeBackPrimaryKey is null</sql>
-</upgrade>
-
-

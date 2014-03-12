@@ -1,3 +1,0 @@
-<upgrade>
-    <java failOnError="true">at.workflow.webdesk.po.impl.update.v110.PoUpdateValidityToDayExact</java>
-</upgrade>

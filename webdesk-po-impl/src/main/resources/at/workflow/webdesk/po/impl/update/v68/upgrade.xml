@@ -1,7 +1,0 @@
-<upgrade>
-
-    <!--  ggruber 2012-12-14: added this script due to errors in 3.2.2-GA to 3.4 migration and having NULL values in PoAction -->
-    <sql dataSource="webdesk" failOnError="true">update PoAction set allowUpdateOnVersionChange = 1 where allowUpdateOnVersionChange is null</sql>
-    
-    <java>at.workflow.webdesk.po.impl.update.v68.CorrectActionNameInCustomFct</java>
-</upgrade>

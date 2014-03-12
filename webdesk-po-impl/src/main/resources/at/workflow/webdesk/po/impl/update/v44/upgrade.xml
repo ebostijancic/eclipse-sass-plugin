@@ -1,5 +1,0 @@
-<upgrade>
-    
-    <sql dataSource="webdesk" failOnError="false">update PoRole set includeHierarchicalGroup=0</sql>
-    
-</upgrade>
